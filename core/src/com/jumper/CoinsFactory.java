@@ -43,9 +43,7 @@ public class CoinsFactory extends Actor {
     private void removeCoin(){
         coin = coinArray.get(0);
 
-        if(coinArray.size > Constants.MAXIMUM_COINS) {
-            //coinArray.first().dispose();
-            //coinArray.removeIndex(0);
+        if(Resources.getPlayer().getBodyPlayer().getPosition().y - 20 > coin.getBodyCoin().getPosition().y) {
             coinArray.removeValue(coin,true);
             coin.destroyCoin();
             coin.dispose();

@@ -74,6 +74,12 @@ public class StairsFactory extends Actor {
         }
     }
 
+    private void onGameOver(){
+        if(Resources.getPlayer().getBodyPlayer().getPosition().y < maxStairCoordinateY-Constants.SCREEN_SIZE_HEIGHT){
+            Resources.getPlayer().startNewGame();
+        }
+    }
+
     private void addStair(){
         if(Camera.cordsToMeters(Resources.getCamera()).y > this.maxStairCoordinateY - 20) {
             stair = new Stair();

@@ -50,6 +50,10 @@ public class Coin extends Actor{
         setPicture();
     }
 
+    public Body getBodyCoin(){
+        return bodyCoin;
+    }
+
     private void setPicture(){
         batch = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("coin.png"));
@@ -75,12 +79,12 @@ public class Coin extends Actor{
     }
 
     public void destroyCoin(){
-        if(Resources.getPlayer().getBodyPlayer().getPosition().y - 14 > bodyCoin.getPosition().y) {
+        //if(Resources.getPlayer().getBodyPlayer().getPosition().y - 14 > bodyCoin.getPosition().y) {
             if (bodyCoin != null && !Resources.getWorld().isLocked()) {
                 Resources.getWorld().destroyBody(bodyCoin);
                 bodyCoin = null;
             }
-        }
+        //}
     }
 
     public void dispose(){

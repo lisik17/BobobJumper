@@ -98,10 +98,6 @@ public class Player extends Actor {
 
         draw();
 
-
-
-        ///test
-        
 /*        Vector2 linearVelocity = bodyPlayer.getLinearVelocity();
         float angle = linearVelocity.angle();
         bodyPlayer.setTransform(bodyPlayer.getPosition(), (float) (angle * MathUtils.degreesToRadians));*/
@@ -119,11 +115,14 @@ public class Player extends Actor {
         bodyPlayer.applyLinearImpulse(0f, 25f, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
     }
 
+    public void startNewGame(){
+        Gdx.app.log("app","game over !!!");
+    }
+
     public void dispose(){
         polygonShape.dispose();
         batch.dispose();
         sprite.getTexture().dispose();
-        //circleShape.dispose();
     }
 
 

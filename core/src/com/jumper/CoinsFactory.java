@@ -41,9 +41,14 @@ public class CoinsFactory extends Actor {
     }
 
     private void removeCoin(){
+        coin = coinArray.get(0);
+
         if(coinArray.size > Constants.MAXIMUM_COINS) {
-            coinArray.first().dispose();
-            coinArray.removeIndex(0);
+            //coinArray.first().dispose();
+            //coinArray.removeIndex(0);
+            coinArray.removeValue(coin,true);
+            coin.destroyCoin();
+            coin.dispose();
         }
     }
 

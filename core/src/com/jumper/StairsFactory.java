@@ -96,6 +96,7 @@ public class StairsFactory extends Actor {
         if(stair.readyToBeDestroyed()){
             stairArray.removeValue(stair, true);
             stair.destroyStair();
+            stair.dispose();
         }
     }
 
@@ -104,7 +105,6 @@ public class StairsFactory extends Actor {
         for(Stair stair : stairArray){
             stair.dispose();
         }
-
     }
 
 

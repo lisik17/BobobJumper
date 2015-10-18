@@ -117,17 +117,7 @@ public class Stair extends Actor{
         sprite.setCenter(0, 0);
     }
 
-    public void dispose(){
 
-        polygonShape.dispose();
-        batch.dispose();
-        sprite.getTexture().dispose();
-
-        Resources.getWorld().destroyBody(bodyStair);
-        fixtureDef = null;
-        bodyStair.setUserData(null);
-        bodyStair = null;
-    }
 
     public Body getStairBody(){
         return this.bodyStair;
@@ -178,5 +168,11 @@ public class Stair extends Actor{
             Resources.getWorld().destroyBody(bodyStair);
             bodyStair = null;
         }
+    }
+
+    public void dispose(){
+        polygonShape.dispose();
+        batch.dispose();
+        sprite.getTexture().dispose();
     }
 }

@@ -74,6 +74,15 @@ public class Coin extends Actor{
         bodyCoin.setTransform(x, y, 0);
     }
 
+    public void destroyCoin(){
+        if(Resources.getPlayer().getBodyPlayer().getPosition().y - 14 > bodyCoin.getPosition().y) {
+            if (bodyCoin != null && !Resources.getWorld().isLocked()) {
+                Resources.getWorld().destroyBody(bodyCoin);
+                bodyCoin = null;
+            }
+        }
+    }
+
     public void dispose(){
         circleShape.dispose();
         batch.dispose();

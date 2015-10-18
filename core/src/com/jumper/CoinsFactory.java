@@ -25,6 +25,10 @@ public class CoinsFactory extends Actor {
 
         addCoin();
         removeCoin();
+
+        for(Coin coin : coinArray){
+            coin.draw();
+        }
     }
 
     private void addCoin(){

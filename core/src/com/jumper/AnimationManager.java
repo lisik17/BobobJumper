@@ -41,17 +41,19 @@ public class AnimationManager extends Actor {
     private void drawAnimation() {
         batch.begin();
         timePassed += Gdx.graphics.getDeltaTime();
-        // sprite = new Sprite(animation.getKeyFrame(timePassed,true));
         sprite.setRegion(animation.getKeyFrame(timePassed,true));
+
         metersToPixels();
-        //float ballCordsPixelsY = Resources.getPlayerBody().getPosition().y * Constants.SCREEN_RATIO_HEIGHT ;
-        batch.draw(sprite,ballCordsPixelsX,ballCordsPixelsY-Resources.getCamera().position.y*Constants.SCREEN_RATIO_HEIGHT,20,20);
+        batch.draw(sprite,
+                   ballCordsPixelsX,
+                   ballCordsPixelsY-Resources.getCamera().position.y*Constants.SCREEN_RATIO_HEIGHT,
+                   Constants.PLAYER_WIDTH*Constants.SCREEN_RATIO_WIDTH,Constants.PLAYER_HEIGHT*Constants.SCREEN_RATIO_HEIGHT);
         batch.end();
     }
 
     private void metersToPixels() {
-        ballCordsPixelsX = Resources.getPlayerBody().getPosition().x * Constants.SCREEN_RATIO_WIDTH + Gdx.graphics.getWidth() / 2f ;
-        ballCordsPixelsY = Resources.getPlayerBody().getPosition().y * Constants.SCREEN_RATIO_HEIGHT + Gdx.graphics.getHeight()/ 2f;
+        ballCordsPixelsX = Resources.getPlayer().getBodyPlayer().getPosition().x * Constants.SCREEN_RATIO_WIDTH + Gdx.graphics.getWidth() / 2f ;
+        ballCordsPixelsY = Resources.getPlayer().getBodyPlayer().getPosition().y * Constants.SCREEN_RATIO_HEIGHT + Gdx.graphics.getHeight()/ 2f;
 
         ballCordsPixelsX = ballCordsPixelsX - Constants.PLAYER_WIDTH*Constants.SCREEN_RATIO_WIDTH/2f;
         ballCordsPixelsY = ballCordsPixelsY - Constants.PLAYER_HEIGHT*Constants.SCREEN_RATIO_HEIGHT/2f;

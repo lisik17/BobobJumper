@@ -54,7 +54,12 @@ public class BasicScreen extends Game {
 
     @Override
     public void create() {
-        world = new World(new Vector2(0,-9.81f),true);
+        //world = new World(new Vector2(0,-9.81f),true);
+        world = new World(new Vector2(0,-25f),true);
+       // world = new World(new Vector2(0,0),true);
+
+        World.setVelocityThreshold(0);
+
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(Gdx.graphics.getWidth()/Constants.SCREEN_RATIO_WIDTH,Gdx.graphics.getHeight()/Constants.SCREEN_RATIO_HEIGHT);
 

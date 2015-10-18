@@ -1,13 +1,16 @@
 package com.jumper;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
-import java.awt.Rectangle;
 
 /**
  * Created by Roma-Alisa on 9/24/2015.
@@ -19,10 +22,15 @@ public class Stair extends Actor{
     private FixtureDef fixtureDef;
     private Body bodyStair;
 
+    private SpriteBatch batch;
+    private Texture texture;
+    private Sprite sprite;
+
+    private float stairWidth;
+
     public Stair(){
         createBodyStage(5 / 2f, .5f / 2f);
         bodyStair.setUserData(Constants.STR_STAIR);
-
     }
 
     @Override
@@ -34,6 +42,8 @@ public class Stair extends Actor{
     public void setSize(float width, float height) {
         bodyStair.destroyFixture(bodyStair.getFixtureList().first());
 
+        stairWidth = width;
+
         polygonShape = new PolygonShape();
         polygonShape.setAsBox(width/2f, height/2f);
 
@@ -41,20 +51,30 @@ public class Stair extends Actor{
         fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 2.5f;
-        fixtureDef.friction = .25f;
-        fixtureDef.restitution = .05f;
+        fixtureDef.friction = 0f;
+        fixtureDef.restitution = 1f;
 
         bodyStair = Resources.getWorld().createBody(bodyDef);
         bodyStair.createFixture(fixtureDef);
 
         bodyStair.setUserData(Constants.STR_STAIR);
+
+        setPicture();
+
+        choseStairToMoveLeftRight();
+    }
+
+    private void choseStairToMoveLeftRight() {
+        if(MathUtils.random(5) == 2){
+            bodyStair.setLinearVelocity(3,0);
+        }
     }
 
     private void createBodyStage(float halfWidth,float halfHeight){
         //body def
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(0,0);
+        bodyDef.position.set(0, 0);
 
         //ball shape
         polygonShape = new PolygonShape();
@@ -64,20 +84,55 @@ public class Stair extends Actor{
         fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 2.5f;
-        fixtureDef.friction = .25f;
-        fixtureDef.restitution = .75f;
+        fixtureDef.friction = 0f;
+        fixtureDef.restitution = 0f;
 
         //creating body + fixture
         bodyStair = Resources.getWorld().createBody(bodyDef);
         bodyStair.createFixture(fixtureDef);
 
         bodyStair.setUserData(Constants.STR_STAIR);
+
+        choseStairToMoveLeftRight();
+    }
+
+    public void draw(){
+        batch.setProjectionMatrix(Resources.getCamera().combined);
+        batch.begin();
+        sprite.setPosition(bodyStair.getPosition().x - sprite.getWidth() / 2, bodyStair.getPosition().y - sprite.getHeight() / 2);
+        sprite.setRotation(bodyStair.getAngle() * MathUtils.radiansToDegrees);
+        sprite.draw(batch);
+        batch.end();
+    }
+
+    private void setPicture(){
+        batch = new SpriteBatch();
+        texture = new Texture(Gdx.files.internal("grass.png"));
+        sprite = new Sprite(texture);
+
+        sprite.setSize(stairWidth, 2);
+        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
+        sprite.setCenter(0, 0);
     }
 
     public void dispose(){
+
+        //Gdx.app.log("app","dispose!!!!");
+
         polygonShape.dispose();
+        batch.dispose();
+        sprite.getTexture().dispose();
+
+        Resources.getWorld().destroyBody(bodyStair);
+        fixtureDef = null;
+        //polygonShape.dispose();
+        bodyStair.setUserData(null);
+        bodyStair = null;
     }
 
+    public Body getStairBody(){
+        return this.bodyStair;
+    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -87,5 +142,18 @@ public class Stair extends Actor{
     @Override
     public void act(float delta) {
         super.act(delta);
+
+        stairMoveLeftRight();
+    }
+
+    private void stairMoveLeftRight() {
+        if(stairGettingOutOfBorder()){
+            bodyStair.setLinearVelocity(-bodyStair.getLinearVelocity().x,0);
+        }
+    }
+
+    private boolean stairGettingOutOfBorder() {
+        return bodyStair.getPosition().x > (Constants.SCREEN_SIZE_WIDTH - Constants.STAIR_LENGTH)/2f
+           || bodyStair.getPosition().x < (-Constants.SCREEN_SIZE_WIDTH + Constants.STAIR_LENGTH)/2f;
     }
 }

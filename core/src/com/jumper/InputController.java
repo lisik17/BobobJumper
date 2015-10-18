@@ -59,7 +59,12 @@ public class InputController implements InputProcessor {
     }
 
     private void movePlayer() {
-        bodyPlayer.setLinearVelocity(vecTouchUpCoordinates.x -vecTouchDownCoordinates.x,vecTouchUpCoordinates.y -vecTouchDownCoordinates.y);
+        //bodyPlayer.setLinearVelocity((vecTouchUpCoordinates.x - vecTouchDownCoordinates.x) * 1f, (vecTouchUpCoordinates.y - vecTouchDownCoordinates.y) * 1f);
+/*        if(vecTouchUpCoordinates.x < vecTouchDownCoordinates.x) {
+            bodyPlayer.setAngularVelocity(2);
+        }else{
+            bodyPlayer.setAngularVelocity(-2);
+        }*/
     }
 
     @Override

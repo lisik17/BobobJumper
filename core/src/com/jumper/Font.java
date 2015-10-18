@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
+
+
 
 /**
  * Created by Roma-Alisa on 9/27/2015.
@@ -18,6 +22,9 @@ public class Font extends Actor{
     private GlyphLayout layout;
     private float deltaFade;
     private boolean isFadeIn;
+    private static boolean applyFontEffect;
+
+
 
 
     public Font(){
@@ -28,10 +35,12 @@ public class Font extends Actor{
 
         deltaFade = 0;
         isFadeIn = true;
+        applyFontEffect = false;
+
         batch = new SpriteBatch();
-        message = "hhhh";
+        message = "";
         font = new BitmapFont(Gdx.files.internal("font/white.fnt"),false);
-        //font.setColor(Color.BLUE);
+        font.setColor(Color.GREEN);
         font.getData().setScale(Gdx.graphics.getWidth() / Constants.STRING_SIZE_RATIO);
 
     }
@@ -40,8 +49,10 @@ public class Font extends Actor{
         batch.begin();
         layout = new GlyphLayout(font, message);
 
-        fadeIn();
-        fadeOut();
+        if(applyFontEffect){
+            fadeIn();
+            fadeOut();
+        }
 
         font.draw(batch, Long.toString(Resources.getScore()),  50, Gdx.graphics.getHeight() - 50);
         batch.end();
@@ -67,6 +78,22 @@ public class Font extends Actor{
             return;
         }
         isFadeIn = true;
+    }
+
+    public static void applyFontEffect(){
+        applyFontEffect = true;
+
+        Timer timer = new Timer();
+        Task task = timer.scheduleTask(new Task() {
+            @Override
+            public void run () {
+                //Gdx.app.log("TimerTest", "ping");
+                applyFontEffect = false;
+
+            }
+        }, 1.55f);
+
+
     }
 
     public void setStringMessage(String message){

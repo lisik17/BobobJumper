@@ -31,7 +31,7 @@ public class Wall extends Actor {
 
         //ball shape
         chainShape = new ChainShape();
-        chainShape.createChain(new Vector2[]{new Vector2(-11.5f, 27), new Vector2(-11.5f, -25)});
+        chainShape.createChain(new Vector2[]{new Vector2(-11.5f, 50), new Vector2(-11.5f, -50)});
 
         //fixture def
         fixtureDef = new FixtureDef();
@@ -46,7 +46,7 @@ public class Wall extends Actor {
 
         //WALL RIGHT
         chainShape = new ChainShape();
-        chainShape.createChain(new Vector2[]{new Vector2(11.5f, 27), new Vector2(11.5f, -25)});
+        chainShape.createChain(new Vector2[]{new Vector2(11.5f, 50), new Vector2(11.5f, -50)});
 
         //fixture def
         fixtureDef = new FixtureDef();

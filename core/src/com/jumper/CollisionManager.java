@@ -1,8 +1,7 @@
 package com.jumper;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -14,6 +13,20 @@ import com.badlogic.gdx.physics.box2d.World;
  */
 public class CollisionManager {
 
+    private Body bodyA;
+    private Body bodyB;
+    private State state;
+    private Vector2 vegImpulse = new Vector2();
+
+    private enum State{
+        COL_COIN,COL_STAIR,NONE;
+    }
+
+    private void setCollisionBodies(Contact contact){
+        bodyA = contact.getFixtureA().getBody();
+        bodyB = contact.getFixtureB().getBody();
+    }
+
     public CollisionManager(){
 
         setContactListener(Resources.getWorld());
@@ -21,56 +34,85 @@ public class CollisionManager {
 
     private void setContactListener(World world) {
         world.setContactListener(new ContactListener() {
+
             @Override
             public void beginContact(Contact contact) {
-                // Check to see if the collision is between the second sprite and the bottom of the screen
-                // If so apply a random amount of upward force to both objects... just because
-                if(contact.getFixtureA().getBody() != null && contact.getFixtureB().getBody() != null){
-                    //Gdx.app.log("app",(String)contact.getFixtureA().getBody().getUserData());
-                    //Gdx.app.log("app B",(String)contact.getFixtureB().getBody().getUserData());
-                    if(contact.getFixtureB().getBody().getUserData() == "coin"){
-                        //Gdx.app.log("app B","!!!");
-                       // contact.setEnabled(false);
-                        Resources.setScore(Resources.getScore()+5);
-                        contact.getFixtureB().getBody().applyForceToCenter(0,10,true);
-                        contact.getFixtureB().getBody().applyAngularImpulse(200, true);
-                    }
-                }
+                setCollisionState(contact);
+
+                onCoinCollMiddle();
+                onStairCollMiddle();
             }
 
             @Override
             public void endContact(Contact contact) {
+                setCollisionState(contact);
             }
 
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
-                //Gdx.app.log("app",(String)contact.getFixtureA().getBody().getUserData());
-//Gdx.app.log("app B",(String)contact.getFixtureB().getBody().getUserData());
-                if(contact.getFixtureA().getBody() != null && contact.getFixtureB().getBody() != null)
-                    if (contact.getFixtureB().getBody().getUserData() == Constants.STR_COIN) {
-                        //Gdx.app.log("app B", "!!!");
-                        ///contact.getFixtureB().getBody().setLinearVelocity(1,1);
+                setCollisionState(contact);
 
-                        contact.getFixtureB().getBody().setLinearVelocity(0,-15);
-
-/*                        contact.getFixtureB().getBody().setType(BodyDef.BodyType.DynamicBody);
-                        contact.getFixtureB().getBody().applyAngularImpulse(100, true);
-                        contact.getFixtureA().getBody().applyAngularImpulse(100, true);*/
-                        //contact.getFixtureB().getBody().applyAngularImpulse(new Vector2(200,200),contact.getFixtureB().getBody().getPosition());
-                        contact.getFixtureB().getBody().applyLinearImpulse(new Vector2(10, 10), contact.getFixtureB().getBody().getPosition(), true);
-
-                        //contact.getFixtureB().getBody().app
-
-                        contact.setEnabled(false);
-                    }
+                onCoinCollStart(contact);
+                onStairCollStart(contact);
             }
 
             @Override
             public void postSolve(Contact contact, ContactImpulse impulse) {
-
+                setCollisionState(contact);
             }
 
-    });
+        });
+    }
+
+    private void onCoinCollMiddle() {
+        if(state == State.COL_COIN){
+            Resources.setScore(Resources.getScore() + 5);
+        }
+    }
+
+    private void onStairCollMiddle() {
+        if(state == State.COL_STAIR){
+            Resources.getPlayer().jumpUp();
+        }
+    }
+
+    private void setCollisionState(Contact contact) {
+        setCollisionBodies(contact);
+        detectCollisionState();
+    }
+
+    private void onStairCollStart(Contact contact) {
+        if (state == State.COL_STAIR) {
+            if(bodyA.getPosition().y < bodyB.getPosition().y){
+                contact.setEnabled(false);
+            }
+
+        }
+    }
+
+    private void onCoinCollStart(Contact contact) {
+        if(state == State.COL_COIN){
+            bodyB.setLinearVelocity(0, -15);
+            bodyB.setAngularVelocity(3);
+
+            Font.applyFontEffect();
+
+            contact.setEnabled(false);
+        }
+    }
+
+    private void detectCollisionState() {
+        if(bodyA != null && bodyB != null){
+            if (bodyB.getUserData() == Constants.STR_COIN || bodyA.getUserData() == Constants.STR_COIN) {
+                state = State.COL_COIN;
+                return;
+            }
+            if (bodyB.getUserData() == Constants.STR_STAIR || bodyA.getUserData() == Constants.STR_STAIR) {
+                state = State.COL_STAIR;
+                return;
+            }
+        }
+        state = State.NONE;
     }
 
 

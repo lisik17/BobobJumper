@@ -97,6 +97,10 @@ public class Player extends Actor {
         jumpLeftRight();
 
         draw();
+
+
+
+        ///test
         
 /*        Vector2 linearVelocity = bodyPlayer.getLinearVelocity();
         float angle = linearVelocity.angle();

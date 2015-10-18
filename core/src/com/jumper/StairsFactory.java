@@ -104,6 +104,7 @@ public class StairsFactory extends Actor {
         for(Stair stair : stairArray){
             stair.dispose();
         }
+
     }
 
 

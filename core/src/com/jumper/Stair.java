@@ -12,6 +12,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import java.lang.reflect.Array;
+
 /**
  * Created by Roma-Alisa on 9/24/2015.
  */
@@ -117,15 +119,12 @@ public class Stair extends Actor{
 
     public void dispose(){
 
-        //Gdx.app.log("app","dispose!!!!");
-
         polygonShape.dispose();
         batch.dispose();
         sprite.getTexture().dispose();
 
         Resources.getWorld().destroyBody(bodyStair);
         fixtureDef = null;
-        //polygonShape.dispose();
         bodyStair.setUserData(null);
         bodyStair = null;
     }
@@ -155,6 +154,23 @@ public class Stair extends Actor{
     private boolean stairGettingOutOfBorder() {
         return bodyStair.getPosition().x > (Constants.SCREEN_SIZE_WIDTH - Constants.STAIR_LENGTH)/2f
            || bodyStair.getPosition().x < (-Constants.SCREEN_SIZE_WIDTH + Constants.STAIR_LENGTH)/2f;
+    }
+
+    public boolean readyToBeDestroyed(){
+        if(Resources.getPlayer().getBodyPlayer().getPosition().y - 14 > bodyStair.getPosition().y){
+            rotateBeforeDestroy();
+            if(Resources.getPlayer().getBodyPlayer().getPosition().y -20 > bodyStair.getPosition().y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void rotateBeforeDestroy() {
+        if(bodyStair.getAngularVelocity() == 0) {
+            bodyStair.setAngularVelocity(MathUtils.random(-3, 3));
+            bodyStair.setLinearVelocity(0, -5);
+        }
     }
 
     public void destroyStair(){

@@ -156,4 +156,11 @@ public class Stair extends Actor{
         return bodyStair.getPosition().x > (Constants.SCREEN_SIZE_WIDTH - Constants.STAIR_LENGTH)/2f
            || bodyStair.getPosition().x < (-Constants.SCREEN_SIZE_WIDTH + Constants.STAIR_LENGTH)/2f;
     }
+
+    public void destroyStair(){
+        if(bodyStair != null && !Resources.getWorld().isLocked()) {
+            Resources.getWorld().destroyBody(bodyStair);
+            bodyStair = null;
+        }
+    }
 }

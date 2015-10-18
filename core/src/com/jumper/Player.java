@@ -109,12 +109,12 @@ public class Player extends Actor {
 
     private void jumpLeftRight() {
         float val = Gdx.input.getAccelerometerX() / Constants.GRAVITY_EARTH;
-        bodyPlayer.applyForceToCenter(val*50,0,true);
+        bodyPlayer.applyForceToCenter(val * 50, 0, true);
         bodyPlayer.setAngularVelocity(0);
     }
 
     public void jumpUp(){
-        bodyPlayer.setLinearVelocity(0,0);
+        bodyPlayer.setLinearVelocity(0, 0);
 
         bodyPlayer.applyLinearImpulse(0f, 25f, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
     }
@@ -125,4 +125,6 @@ public class Player extends Actor {
         sprite.getTexture().dispose();
         //circleShape.dispose();
     }
+
+
 }

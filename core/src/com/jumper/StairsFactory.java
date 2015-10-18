@@ -73,7 +73,7 @@ public class StairsFactory extends Actor {
         removeStair();
 
         for(Stair stair : stairArray){
-            stair.draw();
+            //stair.draw();
             stair.act(10f);
         }
     }
@@ -109,7 +109,10 @@ public class StairsFactory extends Actor {
             //stairArray.removeValue(stairArray.get(0), true);
 
             if(Resources.getPlayer().getBodyPlayer().getPosition().y -20 > stairArray.first().getStairBody().getPosition().y) {
+                Stair st = stairArray.get(0);
                 stairArray.removeValue(stairArray.get(0), true);
+                st.destroyStair();
+
                 //stairArray.get(0).dispose();
                 //stairArray.removeIndex(0);
             }

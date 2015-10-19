@@ -120,7 +120,7 @@ public class Player extends Actor {
     }
 
     public void startNewGame(){
-        Gdx.app.log("app","game over !!!");
+        //Gdx.app.log("app","game over !!!");
     }
 
     public void dispose(){

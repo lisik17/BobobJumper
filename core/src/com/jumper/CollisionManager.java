@@ -1,5 +1,6 @@
 package com.jumper;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -19,7 +20,7 @@ public class CollisionManager {
     private Vector2 vegImpulse = new Vector2();
 
     private enum State{
-        COL_COIN,COL_STAIR,NONE;
+        COL_COIN,COL_STAIR,COL_SPIRAL,NONE;
     }
 
     private void setCollisionBodies(Contact contact){
@@ -54,6 +55,7 @@ public class CollisionManager {
 
                 onCoinCollStart(contact);
                 onStairCollStart(contact);
+                onSpiralCollStart(contact);
             }
 
             @Override
@@ -90,6 +92,18 @@ public class CollisionManager {
         }
     }
 
+    private void onSpiralCollStart(Contact contact) {
+        if(state == State.COL_SPIRAL){
+            //Gdx.app.log("app","here!!!");
+            //bodyA.applyAngularImpulse(0f,200f, bodyA.getPosition().x, bodyA.getPosition().y, true);
+            if(bodyA.getPosition().y < bodyB.getPosition().y){
+                contact.setEnabled(false);
+            }else {
+                bodyA.applyLinearImpulse(0, 200, bodyA.getPosition().x, bodyA.getPosition().y, true);
+            }
+        }
+    }
+
     private void onCoinCollStart(Contact contact) {
         if(state == State.COL_COIN){
             bodyB.setLinearVelocity(0, -15);
@@ -109,6 +123,10 @@ public class CollisionManager {
             }
             if (bodyB.getUserData() == Constants.STR_STAIR || bodyA.getUserData() == Constants.STR_STAIR) {
                 state = State.COL_STAIR;
+                return;
+            }
+            if (bodyB.getUserData() == Constants.STR_SPIRAL || bodyA.getUserData() == Constants.STR_SPIRAL) {
+                state = State.COL_SPIRAL;
                 return;
             }
         }

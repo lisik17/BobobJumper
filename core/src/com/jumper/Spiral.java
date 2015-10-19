@@ -46,7 +46,7 @@ public class Spiral extends Actor {
         bodySpiral = Resources.getWorld().createBody(bodyDef);
         bodySpiral.createFixture(fixtureDef);
 
-        bodySpiral.setUserData(Constants.STR_STAIR);
+        bodySpiral.setUserData(Constants.STR_SPIRAL);
     }
 
     public void destroySpiral(){

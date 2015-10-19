@@ -39,6 +39,9 @@ public class Constants {
     public static int MAXIMUM_COINS = 6;
     public static String STR_COIN = "coin";
 
+    //SPIRAL
+    public static String STR_SPIRAL = "spiral";
+
     //PLAYER
     public static float PLAYER_WIDTH = 1f;
     public static float PLAYER_HEIGHT = 1f;

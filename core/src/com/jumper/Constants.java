@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
  */
 public class Constants {
     //WORLD
-    public static final float TIME_STEP = 1/60f;
+    public static final float TIME_STEP = 1/50f;
     public static int VELOCITY_ITERATIONS = 8, POSITION_ITERATIONS = 3;
     public static float GRAVITY_EARTH =  -9.8f;
 

@@ -100,7 +100,7 @@ public class StairsFactory extends Actor {
     }
 
     private void addSpiral(float xPos, float yPos) {
-        if(MathUtils.random(5) == 2 && stair.notMovingLeftRight()){
+        if(MathUtils.random(5) == 1 && stair.notMovingLeftRight()){
             Resources.getSpiralFactory().addSpiral(new Spiral(), xPos, yPos);
         }
     }

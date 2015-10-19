@@ -60,7 +60,7 @@ public class Player extends Actor {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         //fixtureDef.density = 2.5f;
-        fixtureDef.density = 2.5f;
+        fixtureDef.density = 2f;
         fixtureDef.friction = 0f;
         fixtureDef.restitution = 1f;
 
@@ -115,8 +115,8 @@ public class Player extends Actor {
 
     public void jumpUp(){
         bodyPlayer.setLinearVelocity(0, 0);
-
-        bodyPlayer.applyLinearImpulse(0f, 55f, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
+        Gdx.app.log("app","jump up");
+        bodyPlayer.applyLinearImpulse(0f, 45f, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
     }
 
     public void startNewGame(){

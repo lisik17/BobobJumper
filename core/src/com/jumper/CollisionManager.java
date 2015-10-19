@@ -42,6 +42,7 @@ public class CollisionManager {
 
                 onCoinCollMiddle();
                 onStairCollMiddle();
+                onSpiralCollMiddle();
             }
 
             @Override
@@ -78,6 +79,13 @@ public class CollisionManager {
         }
     }
 
+    private void onSpiralCollMiddle(){
+        if(state == State.COL_SPIRAL){
+            //Gdx.app.log("app","spiral mid !!!");
+            //bodyA.applyLinearImpulse(0, 200, bodyA.getPosition().x, bodyA.getPosition().y, true);
+        }
+    }
+
     private void setCollisionState(Contact contact) {
         setCollisionBodies(contact);
         detectCollisionState();
@@ -94,12 +102,13 @@ public class CollisionManager {
 
     private void onSpiralCollStart(Contact contact) {
         if(state == State.COL_SPIRAL){
+            Gdx.app.log("app","spiral");
             //Gdx.app.log("app","here!!!");
             //bodyA.applyAngularImpulse(0f,200f, bodyA.getPosition().x, bodyA.getPosition().y, true);
+            bodyA.applyLinearImpulse(0, 200, bodyA.getPosition().x, bodyA.getPosition().y, true);
+
             if(bodyA.getPosition().y < bodyB.getPosition().y){
                 contact.setEnabled(false);
-            }else {
-                bodyA.applyLinearImpulse(0, 200, bodyA.getPosition().x, bodyA.getPosition().y, true);
             }
         }
     }

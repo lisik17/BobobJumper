@@ -40,6 +40,8 @@ public class Constants {
     public static String STR_COIN = "coin";
 
     //SPIRAL
+    public static float SPIRAL_WIDTH = 1f;
+    public static float SPIRAL_PIC_WIDTH = 2f;
     public static String STR_SPIRAL = "spiral";
 
     //PLAYER

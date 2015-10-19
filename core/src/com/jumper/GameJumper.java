@@ -19,6 +19,7 @@ public class GameJumper extends BasicScreen {
 	private Wall wall;
 	private Background background;
 	private CollisionManager collisionManager;
+	private Earth earth;
 	//private AnimationManager animation;
 	private Font font;
 
@@ -45,6 +46,8 @@ public class GameJumper extends BasicScreen {
 		//animation = new AnimationManager();
 		font = new Font();
 
+		earth = new Earth();
+
 
 		Gdx.input.setInputProcessor(new InputController(player.getBodyPlayer(), camera));
 
@@ -68,6 +71,7 @@ public class GameJumper extends BasicScreen {
 		super.render();
 		//background.act(10f);
 		stairsFactory.act(10f);
+		spiralFactory.act(10f);
 		coinsFactory.act(10f);
 		wall.act(10f);
 		player.act(1f);
@@ -93,6 +97,7 @@ public class GameJumper extends BasicScreen {
 		spiralFactory.dispose();
 		wall.dispose();
 		background.dispose();
+		earth.dispose();
 		//animation.dispose();
 
 		super.dispose();

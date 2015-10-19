@@ -14,7 +14,7 @@ public class SpiralFactory {
     }
 
     public void addSpiral(Spiral spiral, float x, float y){
-        spiral.setPosition(x,y);
+        spiral.setPosition(x, y);
         spiralArray.add(spiral);
     }
 
@@ -27,6 +27,12 @@ public class SpiralFactory {
             spiralArray.removeValue(spiral,true);
             spiral.destroySpiral();
             spiral.dispose();
+        }
+    }
+
+    public void act(float delta) {
+        for(Spiral spiral : spiralArray){
+            spiral.act(10f);
         }
     }
 

@@ -35,7 +35,7 @@ public class Player extends Actor {
 
     public Player(){
         createBodyStage();
-        this.setPosition(5, 15);
+        this.setPosition(-8, 1);
         bodyPlayer.setUserData(Constants.STR_PLAYER);
         setPicture();
 

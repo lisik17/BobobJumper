@@ -67,7 +67,6 @@ public class Player extends Actor {
         //creating body + fixture
         bodyPlayer = Resources.getWorld().createBody(bodyDef);
         bodyPlayer.createFixture(fixtureDef);
-
     }
 
     private void setPicture(){

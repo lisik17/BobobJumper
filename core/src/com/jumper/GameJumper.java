@@ -74,7 +74,8 @@ public class GameJumper extends BasicScreen {
 		spiralFactory.act(10f);
 		coinsFactory.act(10f);
 		wall.act(10f);
-		player.act(1f);
+		player.act(10f);
+		earth.act(10f);
 		//animation.act(10f);
 		//font.act();
 

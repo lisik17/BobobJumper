@@ -72,6 +72,8 @@ public class StairsFactory extends Actor {
             stair.draw();
             stair.act(10f);
         }
+
+        onGameOver();
     }
 
     private void onGameOver(){
@@ -84,11 +86,22 @@ public class StairsFactory extends Actor {
         if(Camera.cordsToMeters(Resources.getCamera()).y > this.maxStairCoordinateY - 20) {
             stair = new Stair();
 
+            float xPos = MathUtils.random(-10, 10);
+            float yPos = this.maxStairCoordinateY + Constants.SPACE_BETWEEN_STAIRS_Y;
+
             stair.setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
-            stair.setPosition(MathUtils.random(-10,10), this.maxStairCoordinateY + Constants.SPACE_BETWEEN_STAIRS_Y);
+            stair.setPosition(xPos, yPos);
+
+            addSpiral(xPos  + MathUtils.random(Constants.STAIR_LENGTH/2f - .5f), yPos);
 
             maxStairCoordinateY = maxStairCoordinateY + Constants.SPACE_BETWEEN_STAIRS_Y;
             stairArray.add(stair);
+        }
+    }
+
+    private void addSpiral(float xPos, float yPos) {
+        if(MathUtils.random(5) == 2 && stair.notMovingLeftRight()){
+            Resources.getSpiralFactory().addSpiral(new Spiral(), xPos, yPos);
         }
     }
 
@@ -97,12 +110,20 @@ public class StairsFactory extends Actor {
     }
 
     private void removeStair(){
+        if(stairArray.size == 0){
+            return;
+        }
+
         stair = stairArray.get(0);
 
         if(stair.readyToBeDestroyed()){
+
+            Resources.getSpiralFactory().removeSpiral();
             stairArray.removeValue(stair, true);
             stair.destroyStair();
             stair.dispose();
+
+
         }
     }
 

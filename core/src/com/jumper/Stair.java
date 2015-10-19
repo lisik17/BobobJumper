@@ -170,6 +170,16 @@ public class Stair extends Actor{
         }
     }
 
+
+    public boolean notMovingLeftRight(){
+        return bodyStair.getLinearVelocity().x == 0;
+    }
+
+
+    public float getY(){
+        return bodyStair.getPosition().y;
+    }
+
     public void dispose(){
         polygonShape.dispose();
         batch.dispose();

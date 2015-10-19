@@ -13,6 +13,7 @@ public class GameJumper extends BasicScreen {
 
 	//private Stair stair;
 	private StairsFactory stairsFactory;
+	private SpiralFactory spiralFactory;
 	private CoinsFactory coinsFactory;
 	private Player player;
 	private Wall wall;
@@ -20,6 +21,7 @@ public class GameJumper extends BasicScreen {
 	private CollisionManager collisionManager;
 	//private AnimationManager animation;
 	private Font font;
+
 
 	RubeSceneLoader loader;
 	RubeScene scene;
@@ -31,8 +33,13 @@ public class GameJumper extends BasicScreen {
 
 		player = new Player();
 		wall = new Wall();
+
 		stairsFactory = new StairsFactory();
+		spiralFactory = new SpiralFactory();
 		coinsFactory = new CoinsFactory();
+
+		Resources.setSpiralFactory(spiralFactory);
+
 		background = new Background();
 		collisionManager = new CollisionManager();
 		//animation = new AnimationManager();
@@ -83,6 +90,7 @@ public class GameJumper extends BasicScreen {
 		player.dispose();
 		stairsFactory.dispose();
 		coinsFactory.dispose();
+		spiralFactory.dispose();
 		wall.dispose();
 		background.dispose();
 		//animation.dispose();

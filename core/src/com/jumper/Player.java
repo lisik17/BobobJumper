@@ -60,7 +60,7 @@ public class Player extends Actor {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         //fixtureDef.density = 2.5f;
-        fixtureDef.density = 0f;
+        fixtureDef.density = 2.5f;
         fixtureDef.friction = 0f;
         fixtureDef.restitution = 1f;
 
@@ -105,14 +105,18 @@ public class Player extends Actor {
 
     private void jumpLeftRight() {
         float val = Gdx.input.getAccelerometerX() / Constants.GRAVITY_EARTH;
-        bodyPlayer.applyForceToCenter(val * 50, 0, true);
+        //bodyPlayer.applyForceToCenter(val * 25, 0, true);
+
+        bodyPlayer.setTransform(bodyPlayer.getPosition().x+val,bodyPlayer.getPosition().y,0);
+
+
         bodyPlayer.setAngularVelocity(0);
     }
 
     public void jumpUp(){
         bodyPlayer.setLinearVelocity(0, 0);
 
-        bodyPlayer.applyLinearImpulse(0f, 25f, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
+        bodyPlayer.applyLinearImpulse(0f, 55f, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
     }
 
     public void startNewGame(){

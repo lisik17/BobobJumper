@@ -15,6 +15,17 @@ public class Resources {
     private static Player player;
     private static OrthographicCamera camera;
     private static long score = 0;
+    private static SpiralFactory spiralFactory;
+
+
+    public static SpiralFactory getSpiralFactory() {
+        return spiralFactory;
+    }
+
+    public static void setSpiralFactory(SpiralFactory spiralFactory) {
+        Resources.spiralFactory = spiralFactory;
+    }
+
 
     public static long getScore() {
         return score;

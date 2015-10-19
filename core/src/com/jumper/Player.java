@@ -105,12 +105,23 @@ public class Player extends Actor {
 
     private void jumpLeftRight() {
         float val = Gdx.input.getAccelerometerX() / Constants.GRAVITY_EARTH;
-        //bodyPlayer.applyForceToCenter(val * 25, 0, true);
 
-        bodyPlayer.setTransform(bodyPlayer.getPosition().x+val,bodyPlayer.getPosition().y,0);
+        bodyPlayer.setTransform(bodyPlayer.getPosition().x + val, bodyPlayer.getPosition().y, 0);
+
+        correctOutOfBorders();
+
 
 
         bodyPlayer.setAngularVelocity(0);
+    }
+
+    private void correctOutOfBorders() {
+        if(bodyPlayer.getPosition().x < -Constants.SCREEN_SIZE_WIDTH/2f + 2){
+            bodyPlayer.setTransform(Constants.SCREEN_SIZE_WIDTH/2f - 2, bodyPlayer.getPosition().y, 0);
+        }
+        if(bodyPlayer.getPosition().x > Constants.SCREEN_SIZE_WIDTH/2f - 2){
+            bodyPlayer.setTransform(-Constants.SCREEN_SIZE_WIDTH/2f + 2, bodyPlayer.getPosition().y, 0);
+        }
     }
 
     public void jumpUp(){

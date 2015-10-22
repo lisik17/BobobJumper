@@ -9,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 /**
  * Created by Roma-Alisa on 19/10/15.
@@ -73,7 +72,6 @@ public class Earth {
         sprite.draw(batch);
         batch.end();
     }
-
 
     public void dispose(){
         chainShape.dispose();

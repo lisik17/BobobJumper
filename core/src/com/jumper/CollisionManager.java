@@ -131,7 +131,9 @@ public class CollisionManager {
                 return;
             }
             if (bodyB.getUserData() == Constants.STR_STAIR || bodyA.getUserData() == Constants.STR_STAIR) {
-                state = State.COL_STAIR;
+                //if(state != State.COL_SPIRAL || bodyA.getLinearVelocity().x < 0) {
+                    state = State.COL_STAIR;
+                //}
                 return;
             }
             if (bodyB.getUserData() == Constants.STR_SPIRAL || bodyA.getUserData() == Constants.STR_SPIRAL) {

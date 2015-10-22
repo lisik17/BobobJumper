@@ -2,6 +2,7 @@ package com.jumper;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.gushikustudios.rube.RubeScene;
@@ -9,7 +10,7 @@ import com.gushikustudios.rube.loader.RubeSceneAsyncLoader;
 import com.gushikustudios.rube.loader.RubeSceneLoader;
 
 
-public class GameJumper extends BasicScreen {
+public class GameJumper extends BasicScreen implements Screen{
 
 	//private Stair stair;
 	private StairsFactory stairsFactory;
@@ -29,7 +30,8 @@ public class GameJumper extends BasicScreen {
 	private AssetManager mAssetManager;
 
 	@Override
-	public void create() {
+	//public void create() {
+	public void show(){
 		super.create();
 
 		player = new Player();
@@ -66,10 +68,10 @@ public class GameJumper extends BasicScreen {
 	}
 
 	@Override
-	public void render() {
+	public void render(float delta) {
 
 		super.render();
-		//background.act(10f);
+		background.act(10f);
 		stairsFactory.act(10f);
 		spiralFactory.act(10f);
 		coinsFactory.act(10f);
@@ -87,8 +89,17 @@ public class GameJumper extends BasicScreen {
 	}
 
 
+/*	@Override
+	public void show() {
+
+	}*/
 
 
+
+	@Override
+	public void hide() {
+
+	}
 
 	@Override
 	public void dispose() {

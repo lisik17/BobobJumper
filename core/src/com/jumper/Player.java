@@ -125,12 +125,10 @@ public class Player extends Actor {
 
     public void jumpUp(){
         bodyPlayer.setLinearVelocity(0, 0);
-        Gdx.app.log("app","jump up");
         bodyPlayer.applyLinearImpulse(0f, 45f, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
     }
 
     public void startNewGame(){
-        //Gdx.app.log("app","game over !!!");
     }
 
     public void dispose(){

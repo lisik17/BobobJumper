@@ -31,13 +31,9 @@ public class Menu implements Screen {
     private Table table;
     private TextButton bottonPlay, buttonExit;
     private BitmapFont white,black;
-    private Label heading;
     private TextButton.TextButtonStyle textButtonStyle;
-    private final MainScreen game;
 
-    public Menu(MainScreen game){
-        this.game =game;
-    }
+    public Menu(){}
 
     @Override
     public void show() {
@@ -70,13 +66,7 @@ public class Menu implements Screen {
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //game.setScreen(new GameScreen(game));
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new GameJumper());
-                //this.setS
-                Gdx.app.log("app", "here!!");
-
-                //game.setScreen(new GameJumper());
-
             }
         });
 

@@ -1,9 +1,14 @@
 package com.jumper;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
+
+import java.awt.image.Kernel;
 
 /**
  * Created by Roma-Alisa on 9/24/2015.
@@ -29,7 +34,11 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+
+        if(keycode == Input.Keys.BACK){
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new Menu());
+        }
+        return true;
     }
 
     @Override

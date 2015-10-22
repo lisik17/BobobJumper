@@ -86,6 +86,8 @@ public class GameJumper extends BasicScreen implements Screen{
 		//Camera.moveDown(camera);
 		Camera.act();
 
+		Gdx.input.setCatchBackKey(true);
+
 	}
 
 

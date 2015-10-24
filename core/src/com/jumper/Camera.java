@@ -29,7 +29,7 @@ public class Camera extends Actor{
     }
 
     public static void act(){
-        moveDown(Resources.getCamera());
+        //moveDown(Resources.getCamera());
         followPlayer(Resources.getCamera());
     }
 }

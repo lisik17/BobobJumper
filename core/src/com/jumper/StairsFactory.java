@@ -1,6 +1,7 @@
 package com.jumper;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
@@ -12,7 +13,7 @@ import java.util.Random;
  */
 public class StairsFactory extends Actor {
     private Array<Stair> stairArray;
-    private int maxStairCoordinateY;
+    private float maxStairCoordinateY;
     private Stair stair;
     private Random random;
 
@@ -73,6 +74,8 @@ public class StairsFactory extends Actor {
             stair.act(10f);
         }
 
+        //Gdx.app.log("app",String.valueOf(stairArray.size));
+
         onGameOver();
     }
 
@@ -83,14 +86,23 @@ public class StairsFactory extends Actor {
     }
 
     private void addStair(){
-        if(Camera.cordsToMeters(Resources.getCamera()).y > this.maxStairCoordinateY - 20) {
+        //if(Math.round(Camera.cordsToMeters(Resources.getCamera()).y) > this.maxStairCoordinateY - 20f) {
+
+        if(Resources.getPlayer().getBodyPlayer().getPosition().y > this.maxStairCoordinateY - 20 ){
+        //if(20 == this.maxStairCoordinateY - Camera.cordsToMeters(Resources.getCamera()).y) {
+
+
             stair = new Stair();
 
             float xPos = MathUtils.random(-10, 10);
+            //float xPos = 0;
             float yPos = this.maxStairCoordinateY + Constants.SPACE_BETWEEN_STAIRS_Y;
 
             stair.setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
             stair.setPosition(xPos, yPos);
+
+            //Gdx.app.log("maxf", String.valueOf(Camera.cordsToMeters(Resources.getCamera()).y) + "   " + Resources.getPlayer().getBodyPlayer().getPosition().y + "  " + String.valueOf(yPos));
+
 
             addSpiral(xPos  + MathUtils.random(Constants.STAIR_LENGTH/2f - .5f), yPos);
 
@@ -117,6 +129,8 @@ public class StairsFactory extends Actor {
         stair = stairArray.get(0);
 
         if(stair.readyToBeDestroyed()){
+
+            //Gdx.app.log("app", "destroy");
 
             Resources.getSpiralFactory().removeSpiral();
             stairArray.removeValue(stair, true);

@@ -74,7 +74,7 @@ public class GameJumper extends BasicScreen implements Screen{
 		background.act(10f);
 		stairsFactory.act(10f);
 		spiralFactory.act(10f);
-		coinsFactory.act(10f);
+		//coinsFactory.act(10f);
 		wall.act(10f);
 		player.act(10f);
 		earth.act(10f);
@@ -107,7 +107,7 @@ public class GameJumper extends BasicScreen implements Screen{
 	public void dispose() {
 		player.dispose();
 		stairsFactory.dispose();
-		coinsFactory.dispose();
+		//coinsFactory.dispose();
 		spiralFactory.dispose();
 		wall.dispose();
 		background.dispose();

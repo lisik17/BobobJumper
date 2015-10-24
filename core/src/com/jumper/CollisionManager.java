@@ -93,10 +93,14 @@ public class CollisionManager {
 
     private void onStairCollStart(Contact contact) {
         if (state == State.COL_STAIR) {
-            if(bodyA.getPosition().y < bodyB.getPosition().y){
-                contact.setEnabled(false);
-            }
+            disableCollisionIfBodyUnderStair(contact);
 
+        }
+    }
+
+    private void disableCollisionIfBodyUnderStair(Contact contact) {
+        if(bodyA.getPosition().y < bodyB.getPosition().y){
+            contact.setEnabled(false);
         }
     }
 
@@ -132,8 +136,10 @@ public class CollisionManager {
             }
             if (bodyB.getUserData() == Constants.STR_STAIR || bodyA.getUserData() == Constants.STR_STAIR) {
                 //if(state != State.COL_SPIRAL || bodyA.getLinearVelocity().x < 0) {
+                if(state != State.COL_SPIRAL || bodyA.getLinearVelocity().x < 0) {
+                //if(state != State.COL_SPIRAL) {
                     state = State.COL_STAIR;
-                //}
+                }
                 return;
             }
             if (bodyB.getUserData() == Constants.STR_SPIRAL || bodyA.getUserData() == Constants.STR_SPIRAL) {

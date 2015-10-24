@@ -22,7 +22,7 @@ public class Constants {
 
     //CAMERA
     //public static float CAMERA_MOVEMENT_Y = .05f;
-    //public static float CAMERA_MOVEMENT_Y = .1f;
+    //public static float CAMERA_MOVEMENT_Y = 5f;
     public static float CAMERA_MOVEMENT_Y = 0;
     public static float CAMERA_MOVEMENT_X = 0f;
 

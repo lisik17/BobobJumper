@@ -1,5 +1,6 @@
 package com.jumper;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -35,7 +36,7 @@ public class Player extends Actor {
 
     public Player(){
         createBodyStage();
-        this.setPosition(-8, 1);
+        this.setPosition(-8, 0);
         bodyPlayer.setUserData(Constants.STR_PLAYER);
         setPicture();
 
@@ -51,7 +52,7 @@ public class Player extends Actor {
         //body def
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(0,0.1f);
+        bodyDef.position.set(0,0f);
 
         polygonShape = new PolygonShape();
         polygonShape.setAsBox(Constants.PLAYER_WIDTH / 2f, Constants.PLAYER_HEIGHT / 2f);
@@ -96,7 +97,7 @@ public class Player extends Actor {
         jumpLeftRight();
 
         draw();
-
+        //Gdx.app.log("maxf", String.valueOf(Camera.cordsToMeters(Resources.getCamera()).y) + "   " + Resources.getPlayer().getBodyPlayer().getPosition().y);
 /*        Vector2 linearVelocity = bodyPlayer.getLinearVelocity();
         float angle = linearVelocity.angle();
         bodyPlayer.setTransform(bodyPlayer.getPosition(), (float) (angle * MathUtils.degreesToRadians));*/
@@ -129,6 +130,8 @@ public class Player extends Actor {
     }
 
     public void startNewGame(){
+        //Gdx.app.log("app","game over!!");
+        //((Game) Gdx.app.getApplicationListener()).setScreen(new GameJumper());
     }
 
     public void dispose(){

@@ -12,8 +12,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import java.lang.reflect.Array;
-
 /**
  * Created by Roma-Alisa on 9/24/2015.
  */
@@ -63,12 +61,12 @@ public class Stair extends Actor{
 
         setPicture();
 
-        choseStairToMoveLeftRight();
+        chooseStairToMoveLeftRight();
     }
 
-    private void choseStairToMoveLeftRight() {
+    private void chooseStairToMoveLeftRight() {
         if(MathUtils.random(5) == 2){
-            bodyStair.setLinearVelocity(3,0);
+            //bodyStair.setLinearVelocity(3,0);
         }
     }
 
@@ -95,7 +93,7 @@ public class Stair extends Actor{
 
         bodyStair.setUserData(Constants.STR_STAIR);
 
-        choseStairToMoveLeftRight();
+        chooseStairToMoveLeftRight();
     }
 
     public void draw(){

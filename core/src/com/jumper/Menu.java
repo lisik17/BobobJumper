@@ -23,7 +23,7 @@ public class Menu implements Screen {
     private TextureAtlas atlas;
     private Skin skin;
     private Table table;
-    private TextButton buttonPlay, buttonExit;
+    private TextButton buttonPlay, buttonExit, buttonCoolStaff, buttonSettings, buttonMoreGames;
     private BitmapFont white,black;
     private TextButton.TextButtonStyle textButtonStyle;
 
@@ -49,9 +49,11 @@ public class Menu implements Screen {
         textButtonStyle.checked = skin.getDrawable("soundOff");
         textButtonStyle.pressedOffsetX = 1;
         textButtonStyle.pressedOffsetY = -1;
-        textButtonStyle.font = black;
+        textButtonStyle.font = white;
 
         buttonPlay = new TextButton("Start new GAME",textButtonStyle);
+        buttonPlay.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.9f));
+        buttonPlay.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
         buttonPlay.pad(20);
         buttonPlay.addListener(new ClickListener() {
             @Override
@@ -60,7 +62,9 @@ public class Menu implements Screen {
             }
         });
 
-        buttonExit = new TextButton("Start new GAME",textButtonStyle);
+        buttonExit = new TextButton("Exit",textButtonStyle);
+        buttonExit.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.7f));
+        buttonExit.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
         buttonExit.pad(20);
         buttonExit.addListener(new ClickListener() {
             @Override
@@ -69,13 +73,55 @@ public class Menu implements Screen {
             }
         });
 
+        buttonCoolStaff = new TextButton("Cool Staff",textButtonStyle);
+        buttonCoolStaff.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.5f));
+        buttonCoolStaff.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
+        buttonCoolStaff.pad(20);
+        buttonCoolStaff.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new CoolStaff());
+            }
+        });
 
-        table.add(buttonPlay);
-        table.row();
+        buttonSettings = new TextButton("settings",textButtonStyle);
+        buttonSettings.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.3f));
+        buttonSettings.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
+        buttonSettings.pad(20);
+        buttonSettings.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+
+            }
+        });
+
+        buttonMoreGames = new TextButton("More fun",textButtonStyle);
+        buttonMoreGames.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
+        buttonMoreGames.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
+        buttonMoreGames.pad(20);
+        buttonMoreGames.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MoreGames());
+            }
+        });
+
+
+
+
+        //table.add(buttonPlay);
+        //table.row();
         //table.getCell(buttonPlay).spaceBottom(15);
-        table.add(buttonExit);
+        //table.add(buttonExit);
 
-        stage.addActor(table);
+        //stage.addActor(table);
+
+        stage.addActor(buttonPlay);
+        stage.addActor(buttonExit);
+        stage.addActor(buttonCoolStaff);
+        stage.addActor(buttonSettings);
+        stage.addActor(buttonMoreGames);
+
 
 
     }

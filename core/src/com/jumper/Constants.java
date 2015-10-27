@@ -28,7 +28,7 @@ public class Constants {
 
     //STAIRS
     //public static int SPACE_BETWEEN_STAIRS_Y = 7;
-    public static int SPACE_BETWEEN_STAIRS_Y = 7;
+    public static int SPACE_BETWEEN_STAIRS_Y = 10;
     public static int MAXIMUM_STAIRS = 20;
     public static float STAIR_WIDTH = .1f;
     public static String STR_STAIR = "stair";
@@ -45,8 +45,8 @@ public class Constants {
     public static String STR_SPIRAL = "spiral";
 
     //PLAYER
-    public static float PLAYER_WIDTH = 1f;
-    public static float PLAYER_HEIGHT = 1f;
+    public static float PLAYER_WIDTH = 3f;
+    public static float PLAYER_HEIGHT = 3f;
     public static String STR_PLAYER = "player";
 
     //FONT

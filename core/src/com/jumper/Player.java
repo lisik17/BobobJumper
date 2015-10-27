@@ -61,7 +61,7 @@ public class Player extends Actor {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         //fixtureDef.density = 2.5f;
-        fixtureDef.density = 2f;
+        fixtureDef.density = 0.1f;
         fixtureDef.friction = 0f;
         fixtureDef.restitution = 1f;
 
@@ -75,7 +75,7 @@ public class Player extends Actor {
         texture = new Texture(Gdx.files.internal("bobo.png"));
         sprite = new Sprite(texture);
 
-        sprite.setSize(3, 3);
+        sprite.setSize(6, 6);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
         sprite.setCenter(0, 0);
     }
@@ -97,6 +97,7 @@ public class Player extends Actor {
         jumpLeftRight();
 
         draw();
+
         //Gdx.app.log("maxf", String.valueOf(Camera.cordsToMeters(Resources.getCamera()).y) + "   " + Resources.getPlayer().getBodyPlayer().getPosition().y);
 /*        Vector2 linearVelocity = bodyPlayer.getLinearVelocity();
         float angle = linearVelocity.angle();
@@ -126,7 +127,7 @@ public class Player extends Actor {
 
     public void jumpUp(){
         bodyPlayer.setLinearVelocity(0, 0);
-        bodyPlayer.applyLinearImpulse(0f, 45f, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
+        bodyPlayer.applyLinearImpulse(0f, 23f, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
     }
 
     public void startNewGame(){

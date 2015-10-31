@@ -98,10 +98,6 @@ public class Player extends Actor {
 
         draw();
 
-        //Gdx.app.log("maxf", String.valueOf(Camera.cordsToMeters(Resources.getCamera()).y) + "   " + Resources.getPlayer().getBodyPlayer().getPosition().y);
-/*        Vector2 linearVelocity = bodyPlayer.getLinearVelocity();
-        float angle = linearVelocity.angle();
-        bodyPlayer.setTransform(bodyPlayer.getPosition(), (float) (angle * MathUtils.degreesToRadians));*/
     }
 
     private void jumpLeftRight() {
@@ -123,6 +119,11 @@ public class Player extends Actor {
         if(bodyPlayer.getPosition().x > Constants.SCREEN_SIZE_WIDTH/2f - 2){
             bodyPlayer.setTransform(-Constants.SCREEN_SIZE_WIDTH/2f + 2, bodyPlayer.getPosition().y, 0);
         }
+    }
+
+    public void boost(){
+        Gdx.app.log("app","boost !!!");
+        bodyPlayer.applyLinearImpulse(0, 70, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
     }
 
     public void jumpUp(){

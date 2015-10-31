@@ -112,7 +112,7 @@ public class StairsFactory extends Actor {
     }
 
     private void addSpiral(float xPos, float yPos) {
-        if(MathUtils.random(10) == 1 && stair.notMovingLeftRight()){
+        if(MathUtils.random(2) == 1 && stair.notMovingLeftRight()){
             Resources.getSpiralFactory().addSpiral(new Spiral(), xPos, yPos);
         }
     }

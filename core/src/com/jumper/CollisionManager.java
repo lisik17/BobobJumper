@@ -93,8 +93,16 @@ public class CollisionManager {
         return Resources.getPlayer().getBodyPlayer().getLinearVelocity().y < 0;
     }
 
+    private boolean playerAboveSpiral() {
+        return Resources.getPlayer().getBodyPlayer().getLinearVelocity().y < 0;
+    }
+
+
     private void onSpiralCollMiddle(){
         if(state == State.COL_SPIRAL){
+            if(playerAboveSpiral()) {
+                Resources.getPlayer().boost();
+            }
         }
     }
 
@@ -110,17 +118,21 @@ public class CollisionManager {
     }
 
     private void disableStairContactIfNeeded(Contact contact) {
-        if (Resources.getPlayer().getBodyPlayer().getLinearVelocity().y > 0) {
+        if (!playerAboveStair()) {
             contact.setEnabled(false);
         }
     }
 
     private void onSpiralCollStart(Contact contact) {
         if(state == State.COL_SPIRAL){
-            bodyA.applyLinearImpulse(0, 30, bodyA.getPosition().x, bodyA.getPosition().y, true);
+            //bodyA.applyLinearImpulse(0, 30, bodyA.getPosition().x, bodyA.getPosition().y, true);
 
-            if(bodyA.getPosition().y < bodyB.getPosition().y){
+
+            //if(bodyA.getPosition().y < bodyB.getPosition().y){
+            if(!playerAboveSpiral()){
                 contact.setEnabled(false);
+            }else{
+                Resources.getPlayer().boost();
             }
         }
     }

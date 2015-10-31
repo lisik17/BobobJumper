@@ -17,7 +17,6 @@ public class CollisionManager {
     private Body bodyA;
     private Body bodyB;
     private State state;
-    private Vector2 vegImpulse = new Vector2();
 
     private enum State{
         COL_COIN,COL_STAIR,COL_SPIRAL,NONE;
@@ -40,32 +39,19 @@ public class CollisionManager {
             public void beginContact(Contact contact) {
                 setCollisionState(contact);
 
-                //Gdx.app.log("app", "BEGIN !!!");
-
                 onCoinCollMiddle();
-                onStairCollMiddle(contact);
+                onStairCollMiddle();
                 onSpiralCollMiddle();
             }
 
             @Override
             public void endContact(Contact contact) {
-
-                //Gdx.app.log("app", "END !!!");
-
-                //Resources.getPlayer().jumpUp();
-
                 setCollisionState(contact);
             }
 
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
                 setCollisionState(contact);
-
-
-                if (Resources.getPlayer().getBodyPlayer().getLinearVelocity().y > 0) {
-                    contact.setEnabled(false);
-                }
-                //Gdx.app.log("app", "PRE !!!");
 
                 onCoinCollStart(contact);
                 onStairCollStart(contact);
@@ -75,16 +61,18 @@ public class CollisionManager {
             @Override
             public void postSolve(Contact contact, ContactImpulse impulse) {
 
-                //Gdx.app.log("app", "POST !!!");
-
-                if (Resources.getPlayer().getBodyPlayer().getLinearVelocity().y > 0) {
-                    contact.setEnabled(false);
-                }
-
                 setCollisionState(contact);
+
+                onStairCollPost(contact);
             }
 
         });
+    }
+
+    private void onStairCollPost(Contact contact) {
+        if(state == State.COL_STAIR) {
+            disableStairContactIfNeeded(contact);
+        }
     }
 
     private void onCoinCollMiddle() {
@@ -93,26 +81,20 @@ public class CollisionManager {
         }
     }
 
-    private void onStairCollMiddle(Contact contact) {
+    private void onStairCollMiddle() {
         if(state == State.COL_STAIR){
-
-            if(Resources.getPlayer().getBodyPlayer().getLinearVelocity().y < 0) {
+            if(playerAboveStair()) {
                 Resources.getPlayer().jumpUp();
             }
         }
     }
 
-/*    private void onStairCollEnd(Contact contact){
-        if(state == State.COL_STAIR){
-            Gdx.app.log("app","stair collision middle" + contact.isEnabled());
-            Resources.getPlayer().jumpUp();
-        }
-    }*/
+    private boolean playerAboveStair() {
+        return Resources.getPlayer().getBodyPlayer().getLinearVelocity().y < 0;
+    }
 
     private void onSpiralCollMiddle(){
         if(state == State.COL_SPIRAL){
-            //Gdx.app.log("app","spiral mid !!!");
-            //bodyA.applyLinearImpulse(0, 200, bodyA.getPosition().x, bodyA.getPosition().y, true);
         }
     }
 
@@ -123,24 +105,19 @@ public class CollisionManager {
 
     private void onStairCollStart(Contact contact) {
         if (state == State.COL_STAIR) {
-            disableCollisionIfBodyUnderStair(contact);
-
+            disableStairContactIfNeeded(contact);
         }
     }
 
-    private void disableCollisionIfBodyUnderStair(Contact contact) {
-        if(bodyA.getPosition().y  < bodyB.getPosition().y){
-
+    private void disableStairContactIfNeeded(Contact contact) {
+        if (Resources.getPlayer().getBodyPlayer().getLinearVelocity().y > 0) {
             contact.setEnabled(false);
         }
     }
 
     private void onSpiralCollStart(Contact contact) {
         if(state == State.COL_SPIRAL){
-            Gdx.app.log("app","spiral");
-            //Gdx.app.log("app","here!!!");
-            //bodyA.applyAngularImpulse(0f,200f, bodyA.getPosition().x, bodyA.getPosition().y, true);
-            bodyA.applyLinearImpulse(0, 200, bodyA.getPosition().x, bodyA.getPosition().y, true);
+            bodyA.applyLinearImpulse(0, 30, bodyA.getPosition().x, bodyA.getPosition().y, true);
 
             if(bodyA.getPosition().y < bodyB.getPosition().y){
                 contact.setEnabled(false);
@@ -166,11 +143,7 @@ public class CollisionManager {
                 return;
             }
             if (bodyB.getUserData() == Constants.STR_STAIR || bodyA.getUserData() == Constants.STR_STAIR) {
-                //if(state != State.COL_SPIRAL || bodyA.getLinearVelocity().x < 0) {
-                //if(state != State.COL_SPIRAL || bodyA.getLinearVelocity().x < 0) {
-                //if(state != State.COL_SPIRAL) {
-                    state = State.COL_STAIR;
-               // }
+                state = State.COL_STAIR;
                 return;
             }
             if (bodyB.getUserData() == Constants.STR_SPIRAL || bodyA.getUserData() == Constants.STR_SPIRAL) {

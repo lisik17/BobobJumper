@@ -40,19 +40,32 @@ public class CollisionManager {
             public void beginContact(Contact contact) {
                 setCollisionState(contact);
 
+                //Gdx.app.log("app", "BEGIN !!!");
+
                 onCoinCollMiddle();
-                onStairCollMiddle();
+                onStairCollMiddle(contact);
                 onSpiralCollMiddle();
             }
 
             @Override
             public void endContact(Contact contact) {
+
+                //Gdx.app.log("app", "END !!!");
+
+                //Resources.getPlayer().jumpUp();
+
                 setCollisionState(contact);
             }
 
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
                 setCollisionState(contact);
+
+
+                if (Resources.getPlayer().getBodyPlayer().getLinearVelocity().y > 0) {
+                    contact.setEnabled(false);
+                }
+                //Gdx.app.log("app", "PRE !!!");
 
                 onCoinCollStart(contact);
                 onStairCollStart(contact);
@@ -61,6 +74,13 @@ public class CollisionManager {
 
             @Override
             public void postSolve(Contact contact, ContactImpulse impulse) {
+
+                //Gdx.app.log("app", "POST !!!");
+
+                if (Resources.getPlayer().getBodyPlayer().getLinearVelocity().y > 0) {
+                    contact.setEnabled(false);
+                }
+
                 setCollisionState(contact);
             }
 
@@ -73,11 +93,21 @@ public class CollisionManager {
         }
     }
 
-    private void onStairCollMiddle() {
+    private void onStairCollMiddle(Contact contact) {
         if(state == State.COL_STAIR){
-            Resources.getPlayer().jumpUp();
+
+            if(Resources.getPlayer().getBodyPlayer().getLinearVelocity().y < 0) {
+                Resources.getPlayer().jumpUp();
+            }
         }
     }
+
+/*    private void onStairCollEnd(Contact contact){
+        if(state == State.COL_STAIR){
+            Gdx.app.log("app","stair collision middle" + contact.isEnabled());
+            Resources.getPlayer().jumpUp();
+        }
+    }*/
 
     private void onSpiralCollMiddle(){
         if(state == State.COL_SPIRAL){
@@ -100,6 +130,7 @@ public class CollisionManager {
 
     private void disableCollisionIfBodyUnderStair(Contact contact) {
         if(bodyA.getPosition().y  < bodyB.getPosition().y){
+
             contact.setEnabled(false);
         }
     }

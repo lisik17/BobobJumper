@@ -35,7 +35,7 @@ public class StairsFactory extends Actor {
 
         stair = new Stair();
         stair.setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
-        stair.setPosition((7) / 2f, 0);
+        stair.setPosition((7) / 2f, -1);
         stairArray.add(stair);
 
         stair = new Stair();

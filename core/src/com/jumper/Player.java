@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 
 
 /**
@@ -25,6 +28,7 @@ public class Player extends Actor {
 
     private Body bodyPlayer;
     private PolygonShape polygonShape;
+    private FixtureDef fixtureDef;
 
     private SpriteBatch batch;
     private Texture texture;
@@ -58,7 +62,7 @@ public class Player extends Actor {
         polygonShape.setAsBox(Constants.PLAYER_WIDTH / 2f, Constants.PLAYER_HEIGHT / 2f);
 
         //fixture def
-        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef = new FixtureDef();
         fixtureDef.shape = polygonShape;
         //fixtureDef.density = 2.5f;
         fixtureDef.density = 0.1f;
@@ -102,13 +106,8 @@ public class Player extends Actor {
 
     private void jumpLeftRight() {
         float val = Gdx.input.getAccelerometerX() / Constants.GRAVITY_EARTH;
-
         bodyPlayer.setTransform(bodyPlayer.getPosition().x + val, bodyPlayer.getPosition().y, 0);
-
         correctOutOfBorders();
-
-
-
         bodyPlayer.setAngularVelocity(0);
     }
 
@@ -122,7 +121,7 @@ public class Player extends Actor {
     }
 
     public void boost(){
-        Gdx.app.log("app","boost !!!");
+        Gdx.app.log("app", "boost !!!");
         bodyPlayer.applyLinearImpulse(0, 70, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
     }
 
@@ -132,8 +131,14 @@ public class Player extends Actor {
     }
 
     public void startNewGame(){
-        //Gdx.app.log("app","game over!!");
-        //((Game) Gdx.app.getApplicationListener()).setScreen(new GameJumper());
+        Gdx.app.log("app", "game over!!");
+
+        Timer.schedule(new Task() {
+            @Override
+            public void run() {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new Menu());
+            }
+        }, 5);
     }
 
     public void dispose(){

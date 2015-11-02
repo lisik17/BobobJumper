@@ -49,6 +49,7 @@ public class CollisionManager {
                 setCollisionState(contact);
             }
 
+
             @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
                 setCollisionState(contact);

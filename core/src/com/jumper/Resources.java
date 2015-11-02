@@ -16,6 +16,25 @@ public class Resources {
     private static OrthographicCamera camera;
     private static long score = 0;
     private static SpiralFactory spiralFactory;
+    private static Menu menuInstance;
+    private static Font font;
+
+
+    public static Menu getMenuInstance() {
+        return menuInstance;
+    }
+
+    public static void setMenuInstance(Menu menuInstance) {
+        Resources.menuInstance = menuInstance;
+    }
+
+    public static Font getFont() {
+        return font;
+    }
+
+    public static void setFont(Font font) {
+        Resources.font = font;
+    }
 
 
     public static SpiralFactory getSpiralFactory() {

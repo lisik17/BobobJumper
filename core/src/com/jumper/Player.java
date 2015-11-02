@@ -3,21 +3,16 @@ package com.jumper;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 
 
 /**
@@ -34,16 +29,22 @@ public class Player extends Actor {
     private Texture texture;
     private Sprite sprite;
 
+    private State state;
+
+    private enum State{
+        GAME_OVER, PLAYING;
+    }
+
     public Body getBodyPlayer() {
         return bodyPlayer;
     }
 
     public Player(){
+        state = State.PLAYING;
         createBodyStage();
         this.setPosition(-8, 0);
         bodyPlayer.setUserData(Constants.STR_PLAYER);
         setPicture();
-
         Resources.setPlayer(this);
     }
 
@@ -97,9 +98,7 @@ public class Player extends Actor {
     public void act(float delta) {
         
         super.act(delta);
-
         jumpLeftRight();
-
         draw();
 
     }
@@ -121,7 +120,6 @@ public class Player extends Actor {
     }
 
     public void boost(){
-        Gdx.app.log("app", "boost !!!");
         bodyPlayer.applyLinearImpulse(0, 70, bodyPlayer.getPosition().x, bodyPlayer.getPosition().y, true);
     }
 
@@ -131,14 +129,27 @@ public class Player extends Actor {
     }
 
     public void startNewGame(){
-        Gdx.app.log("app", "game over!!");
+        if(state != State.GAME_OVER) {
+            state = State.GAME_OVER;
+            delayedGoToMenu();
 
-        Timer.schedule(new Task() {
+            bodyPlayer.setTransform(0, 10, 0);
+
+            Resources.getFont().setStateGameOver();
+        }
+    }
+
+    private void delayedGoToMenu() {
+        Gdx.app.log("app", "game over");
+
+        Timer t = new Timer();
+        t.scheduleTask(new Task() {
             @Override
             public void run() {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new Menu());
+                Gdx.app.log("app", "run");
+                ((Game) Gdx.app.getApplicationListener()).setScreen(Resources.getMenuInstance());
             }
-        }, 5);
+        }, 3);
     }
 
     public void dispose(){

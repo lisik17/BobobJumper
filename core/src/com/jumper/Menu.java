@@ -26,11 +26,16 @@ public class Menu implements Screen {
     private TextButton buttonPlay, buttonExit, buttonCoolStaff, buttonSettings, buttonMoreGames;
     private BitmapFont white,black;
     private TextButton.TextButtonStyle textButtonStyle;
+    private Menu context;
 
-    public Menu(){}
+    public Menu(){
+        context = this;
+    }
 
     @Override
     public void show() {
+
+
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
@@ -58,7 +63,7 @@ public class Menu implements Screen {
         buttonPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameJumper());
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameJumper(context));
             }
         });
 
@@ -105,16 +110,6 @@ public class Menu implements Screen {
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new MoreGames());
             }
         });
-
-
-
-
-        //table.add(buttonPlay);
-        //table.row();
-        //table.getCell(buttonPlay).spaceBottom(15);
-        //table.add(buttonExit);
-
-        //stage.addActor(table);
 
         stage.addActor(buttonPlay);
         stage.addActor(buttonExit);

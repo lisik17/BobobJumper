@@ -29,6 +29,10 @@ public class GameJumper extends BasicScreen implements Screen{
 	RubeScene scene;
 	private AssetManager mAssetManager;
 
+	public GameJumper(Menu context) {
+		Resources.setMenuInstance(context);
+	}
+
 	@Override
 	//public void create() {
 	public void show(){
@@ -47,6 +51,7 @@ public class GameJumper extends BasicScreen implements Screen{
 		collisionManager = new CollisionManager();
 		//animation = new AnimationManager();
 		font = new Font();
+		Resources.setFont(font);
 
 		earth = new Earth();
 
@@ -74,12 +79,12 @@ public class GameJumper extends BasicScreen implements Screen{
 		//background.act(10f);
 		stairsFactory.act(10f);
 		spiralFactory.act(10f);
-		//coinsFactory.act(10f);
+		coinsFactory.act(10f);
 		wall.act(10f);
 		player.act(10f);
 		earth.act(10f);
 		//animation.act(10f);
-		//font.act();
+		font.act();
 
 		//player.destroyPlayer();
 

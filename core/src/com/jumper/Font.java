@@ -23,12 +23,15 @@ public class Font extends Actor{
     private float deltaFade;
     private boolean isFadeIn;
     private static boolean applyFontEffect;
-
-
-
+    private State state;
 
     public Font(){
+        state = State.NONE;
         this.create();
+    }
+
+    private enum State{
+        NONE,GAME_OVER,UPDATE_SCORE;
     }
 
     public void create () {
@@ -43,19 +46,37 @@ public class Font extends Actor{
         font.setColor(Color.GREEN);
         font.getData().setScale(Gdx.graphics.getWidth() / Constants.STRING_SIZE_RATIO);
 
+        layout = new GlyphLayout(font, message);
+
     }
 
     public void act () {
         batch.begin();
-        layout = new GlyphLayout(font, message);
+        //layout.setText(font, message);
+        //layout = new GlyphLayout(font, message);
 
         if(applyFontEffect){
             fadeIn();
             fadeOut();
         }
 
-        font.draw(batch, Long.toString(Resources.getScore()),  50, Gdx.graphics.getHeight() - 50);
+        font.draw(batch, Long.toString(Resources.getScore()), Constants.SCREEN_PIXELS_SIZE_WIDTH*.1f, Constants.SCREEN_PIXELS_SIZE_HEIGHT*.9f);
+
+        if(state == State.GAME_OVER) {
+            setStringMessage("your score is : " + Resources.getScore());
+            layout.setText(font, message);
+            font.draw(batch, message, Constants.SCREEN_PIXELS_SIZE_WIDTH / 2 - layout.width / 2, Constants.SCREEN_PIXELS_SIZE_HEIGHT * .6f);
+
+            setStringMessage("game over");
+            layout.setText(font, message);
+            font.draw(batch,message, Constants.SCREEN_PIXELS_SIZE_WIDTH/2 - layout.width / 2, Constants.SCREEN_PIXELS_SIZE_HEIGHT/2);
+        }
+
         batch.end();
+    }
+
+    public void setStateGameOver(){
+        state = State.GAME_OVER;
     }
 
     public void setDeltaFade(float delta) {

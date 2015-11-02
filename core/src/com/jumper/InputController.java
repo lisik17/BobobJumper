@@ -20,16 +20,18 @@ public class InputController implements InputProcessor {
     private Vector3 vecTouchUpCoordinates;
     private OrthographicCamera camera;
 
-    public InputController(Body bodyPlayer,OrthographicCamera camera){
+    public InputController(){
         this.vecTouchDownCoordinates = new Vector3();
         this.vecTouchUpCoordinates = new Vector3();
-        this.bodyPlayer = bodyPlayer;
-        this.camera = camera;
+        this.bodyPlayer = Resources.getPlayer().getBodyPlayer();
+        this.camera = Resources.getCamera();
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        return false;
+        if ((keycode == Input.Keys.ESCAPE) || (keycode == Input.Keys.BACK) )
+            Gdx.app.exit();
+        return true;
     }
 
     @Override

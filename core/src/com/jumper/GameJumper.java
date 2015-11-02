@@ -30,6 +30,7 @@ public class GameJumper extends BasicScreen implements Screen{
 	private AssetManager mAssetManager;
 
 	public GameJumper(Menu context) {
+		//Gdx.input.setCatchMenuKey(true);
 		Resources.setMenuInstance(context);
 	}
 
@@ -56,7 +57,7 @@ public class GameJumper extends BasicScreen implements Screen{
 		earth = new Earth();
 
 
-		Gdx.input.setInputProcessor(new InputController(player.getBodyPlayer(), camera));
+		Gdx.input.setInputProcessor(new InputController());
 
 		//loadRUBEscen();
 
@@ -112,7 +113,7 @@ public class GameJumper extends BasicScreen implements Screen{
 	public void dispose() {
 		player.dispose();
 		stairsFactory.dispose();
-		//coinsFactory.dispose();
+		coinsFactory.dispose();
 		spiralFactory.dispose();
 		wall.dispose();
 		background.dispose();

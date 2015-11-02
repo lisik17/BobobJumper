@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -65,8 +66,10 @@ public class Font extends Actor{
 
         if(state == State.UPDATE_SCORE) {
             //if (applyFontEffect) {
-                fadeIn();
-                fadeOut();
+                //fadeIn();
+                //fadeOut();
+
+            //this.addAction(Actions.moveTo(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.3f), .5f));
             state = State.NONE;
             //}
         }

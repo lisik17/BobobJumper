@@ -2,6 +2,7 @@ package com.jumper;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -129,8 +130,6 @@ public class Menu implements Screen {
         stage.addActor(buttonSettings);
         stage.addActor(buttonMoreGames);
 
-
-
     }
 
     @Override
@@ -140,7 +139,7 @@ public class Menu implements Screen {
 
         stage.act();
         stage.draw();
-    }
+  }
 
     @Override
     public void resize(int width, int height) {

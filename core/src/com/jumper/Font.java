@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -25,6 +26,7 @@ public class Font extends Actor{
     private static boolean applyFontEffect;
     private State state;
 
+
     public Font(){
         state = State.NONE;
         this.create();
@@ -35,6 +37,9 @@ public class Font extends Actor{
     }
 
     public void create () {
+
+        TECore tc = new TECore();
+        tc.render();
 
         deltaFade = 0;
         isFadeIn = true;
@@ -52,15 +57,21 @@ public class Font extends Actor{
 
     public void act () {
         batch.begin();
+
+       // TECore te = new TECore();
+        //te.render();
         //layout.setText(font, message);
         //layout = new GlyphLayout(font, message);
 
-        if(applyFontEffect){
-            fadeIn();
-            fadeOut();
+        if(state == State.UPDATE_SCORE) {
+            //if (applyFontEffect) {
+                fadeIn();
+                fadeOut();
+            state = State.NONE;
+            //}
         }
 
-        font.draw(batch, Long.toString(Resources.getScore()), Constants.SCREEN_PIXELS_SIZE_WIDTH*.1f, Constants.SCREEN_PIXELS_SIZE_HEIGHT*.9f);
+        font.draw(batch, Long.toString(Resources.getScore()), Constants.SCREEN_PIXELS_SIZE_WIDTH * .1f, Constants.SCREEN_PIXELS_SIZE_HEIGHT * .9f);
 
         if(state == State.GAME_OVER) {
             setStringMessage("your score is : " + Resources.getScore());
@@ -75,8 +86,14 @@ public class Font extends Actor{
         batch.end();
     }
 
+
+
     public void setStateGameOver(){
         state = State.GAME_OVER;
+    }
+
+    public void setStateUpdateScore(){
+        state = State.UPDATE_SCORE;
     }
 
     public void setDeltaFade(float delta) {

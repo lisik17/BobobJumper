@@ -143,7 +143,8 @@ public class CollisionManager {
             bodyB.setLinearVelocity(0, -15);
             bodyB.setAngularVelocity(3);
 
-            Font.applyFontEffect();
+            //Font.applyFontEffect();
+            Resources.getFont().setStateUpdateScore();
 
             contact.setEnabled(false);
         }

@@ -6,8 +6,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -57,9 +59,11 @@ public class Menu implements Screen {
         textButtonStyle.font = white;
 
         buttonPlay = new TextButton("Start new GAME",textButtonStyle);
-        buttonPlay.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.9f));
+        //buttonPlay.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.9f));
+        buttonPlay.setPosition(0, Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.9f));
         buttonPlay.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
         buttonPlay.pad(20);
+        buttonPlay.addAction(Actions.moveTo(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.9f), .5f));
         buttonPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -68,9 +72,11 @@ public class Menu implements Screen {
         });
 
         buttonExit = new TextButton("Exit",textButtonStyle);
-        buttonExit.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.7f));
+        //buttonExit.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.7f));
+        buttonExit.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH, Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.7f));
         buttonExit.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
         buttonExit.pad(20);
+        buttonExit.addAction(Actions.moveTo(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.7f), .5f));
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -79,9 +85,11 @@ public class Menu implements Screen {
         });
 
         buttonCoolStaff = new TextButton("Cool Staff",textButtonStyle);
-        buttonCoolStaff.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.5f));
+        //buttonCoolStaff.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.5f));
+        buttonCoolStaff.setPosition(0, Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.5f));
         buttonCoolStaff.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
         buttonCoolStaff.pad(20);
+        buttonCoolStaff.addAction(Actions.moveTo(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.5f), .5f));
         buttonCoolStaff.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -90,9 +98,11 @@ public class Menu implements Screen {
         });
 
         buttonSettings = new TextButton("settings",textButtonStyle);
-        buttonSettings.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.3f));
+        //buttonSettings.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.3f));
+        buttonSettings.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH, Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.3f));
         buttonSettings.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
         buttonSettings.pad(20);
+        buttonSettings.addAction(Actions.moveTo(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.3f), .5f));
         buttonSettings.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -101,9 +111,11 @@ public class Menu implements Screen {
         });
 
         buttonMoreGames = new TextButton("More fun",textButtonStyle);
-        buttonMoreGames.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
+        //buttonMoreGames.setPosition(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
+        buttonMoreGames.setPosition(0, Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
         buttonMoreGames.setSize(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.1f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f));
         buttonMoreGames.pad(20);
+        buttonMoreGames.addAction(Actions.moveTo(Constants.SCREEN_PIXELS_SIZE_WIDTH * (.4f), Constants.SCREEN_PIXELS_SIZE_HEIGHT * (.1f), .5f));
         buttonMoreGames.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

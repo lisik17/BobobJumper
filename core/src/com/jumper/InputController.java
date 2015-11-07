@@ -8,14 +8,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 
-import java.awt.image.Kernel;
+
 
 /**
  * Created by Roma-Alisa on 9/24/2015.
  */
 public class InputController implements InputProcessor {
 
-    private Body bodyPlayer;
+    //private Body bodyPlayer;
     private Vector3 vecTouchDownCoordinates;
     private Vector3 vecTouchUpCoordinates;
     private OrthographicCamera camera;
@@ -23,23 +23,25 @@ public class InputController implements InputProcessor {
     public InputController(){
         this.vecTouchDownCoordinates = new Vector3();
         this.vecTouchUpCoordinates = new Vector3();
-        this.bodyPlayer = Resources.getPlayer().getBodyPlayer();
+        //this.bodyPlayer = Resources.getPlayer().getBodyPlayer();
         this.camera = Resources.getCamera();
     }
 
     @Override
     public boolean keyDown(int keycode) {
         if ((keycode == Input.Keys.ESCAPE) || (keycode == Input.Keys.BACK) )
-            Gdx.app.exit();
+
+            if(Resources.getBasicScreen().getScreen().getClass() == GameJumper.class ){
+                Gdx.app.log("app", "game");
+                ((Game) Gdx.app.getApplicationListener()).setScreen(Resources.getMenuInstance());
+            }
+
+            //Gdx.app.log("app", "exit Down");
         return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-
-        if(keycode == Input.Keys.BACK){
-            ((Game) Gdx.app.getApplicationListener()).setScreen(new Menu());
-        }
         return true;
     }
 

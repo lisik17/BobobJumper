@@ -3,6 +3,7 @@ package com.jumper;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -41,6 +42,10 @@ public class Menu implements Screen {
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+/*        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(stage);
+        multiplexer.addProcessor(new InputController());
+        Gdx.input.setInputProcessor(multiplexer);*/
 
         atlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin = new Skin(atlas);
@@ -130,6 +135,10 @@ public class Menu implements Screen {
         stage.addActor(buttonSettings);
         stage.addActor(buttonMoreGames);
 
+/*        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(new InputController());
+        multiplexer.addProcessor(stage);
+        Gdx.input.setInputProcessor(multiplexer);*/
     }
 
     @Override

@@ -77,7 +77,7 @@ public class GameJumper extends BasicScreen implements Screen{
 	public void render(float delta) {
 
 		super.render();
-		//background.act(10f);
+		background.act(10f);
 		stairsFactory.act(10f);
 		spiralFactory.act(10f);
 		coinsFactory.act(10f);

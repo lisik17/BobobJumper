@@ -18,7 +18,16 @@ public class Resources {
     private static SpiralFactory spiralFactory;
     private static Menu menuInstance;
     private static Font font;
+    private static MainScreen mainScreen;
 
+
+    public static MainScreen getBasicScreen() {
+        return mainScreen;
+    }
+
+    public static void setBasicScreen(MainScreen basicScreen) {
+        Resources.mainScreen = basicScreen;
+    }
 
     public static Menu getMenuInstance() {
         return menuInstance;

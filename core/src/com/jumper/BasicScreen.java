@@ -65,6 +65,8 @@ public class BasicScreen extends Game {
 
         Resources.setWorld(world);
         Resources.setCamera(camera);
+
+
     }
 
     @Override

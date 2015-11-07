@@ -41,11 +41,6 @@ public class Menu implements Screen {
 
 
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
-/*        InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(stage);
-        multiplexer.addProcessor(new InputController());
-        Gdx.input.setInputProcessor(multiplexer);*/
 
         atlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
         skin = new Skin(atlas);
@@ -136,10 +131,10 @@ public class Menu implements Screen {
         stage.addActor(buttonSettings);
         stage.addActor(buttonMoreGames);
 
-/*        InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(new InputController());
+        InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
-        Gdx.input.setInputProcessor(multiplexer);*/
+        multiplexer.addProcessor(new InputController());
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override

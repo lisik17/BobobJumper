@@ -67,8 +67,8 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        vecTouchDownCoordinates.set(screenX, screenY, 0);
-        camera.unproject(vecTouchDownCoordinates);
+        //vecTouchDownCoordinates.set(screenX, screenY, 0);
+        //camera.unproject(vecTouchDownCoordinates);
 
         //System.out.println("Down" + vecTouchDownCoordinates.x);
 
@@ -78,8 +78,8 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        vecTouchUpCoordinates.set(screenX, screenY, 0);
-        camera.unproject(vecTouchUpCoordinates);
+        //vecTouchUpCoordinates.set(screenX, screenY, 0);
+        //camera.unproject(vecTouchUpCoordinates);
 
         movePlayer();
 

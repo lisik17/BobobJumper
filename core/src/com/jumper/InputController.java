@@ -29,19 +29,34 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        if ((keycode == Input.Keys.ESCAPE) || (keycode == Input.Keys.BACK) )
+        if ((keycode == Input.Keys.ESCAPE) || (keycode == Input.Keys.BACK) ) {
 
-            if(Resources.getBasicScreen().getScreen().getClass() == GameJumper.class ){
-                Gdx.app.log("app", "game");
-                ((Game) Gdx.app.getApplicationListener()).setScreen(Resources.getMenuInstance());
-            }
+            //if(Resources.getBasicScreen().getScreen().getClass() == GameJumper.class ){
+            Gdx.app.log("app", "game");
+            //    ((Game) Gdx.app.getApplicationListener()).setScreen(Resources.getMenuInstance());
+            // }
 
             //Gdx.app.log("app", "exit Down");
+
+        }
         return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
+
+        if ((keycode == Input.Keys.ESCAPE) || (keycode == Input.Keys.BACK) ) {
+
+            if (ScreenManager.getInstance().getCurrentScreen() == ScreenManager.CurrentScreen.GAME) {
+                ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
+                return true;
+            }
+            if (ScreenManager.getInstance().getCurrentScreen() == ScreenManager.CurrentScreen.MENU) {
+                Gdx.app.exit();
+                return true;
+            }
+        }
+
         return true;
     }
 

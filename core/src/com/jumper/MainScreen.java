@@ -9,8 +9,16 @@ public class MainScreen extends Game {
 
     @Override
     public void create() {
-        Resources.setBasicScreen(this);
-        this.setScreen(new Menu());
+        ScreenManager.getInstance().initialize(this);
+        ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
 
+        //Resources.setBasicScreen(this);
+        //this.setScreen(new Menu());
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        ScreenManager.getInstance().dispose();
     }
 }

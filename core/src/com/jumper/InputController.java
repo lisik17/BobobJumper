@@ -16,29 +16,19 @@ import com.badlogic.gdx.physics.box2d.Body;
 public class InputController implements InputProcessor {
 
     //private Body bodyPlayer;
-    private Vector3 vecTouchDownCoordinates;
-    private Vector3 vecTouchUpCoordinates;
+   // private Vector3 vecTouchDownCoordinates;
+    //private Vector3 vecTouchUpCoordinates;
     private OrthographicCamera camera;
 
     public InputController(){
-        this.vecTouchDownCoordinates = new Vector3();
-        this.vecTouchUpCoordinates = new Vector3();
+        //this.vecTouchDownCoordinates = new Vector3();
+        //this.vecTouchUpCoordinates = new Vector3();
         //this.bodyPlayer = Resources.getPlayer().getBodyPlayer();
         this.camera = Resources.getCamera();
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        if ((keycode == Input.Keys.ESCAPE) || (keycode == Input.Keys.BACK) ) {
-
-            //if(Resources.getBasicScreen().getScreen().getClass() == GameJumper.class ){
-            Gdx.app.log("app", "game");
-            //    ((Game) Gdx.app.getApplicationListener()).setScreen(Resources.getMenuInstance());
-            // }
-
-            //Gdx.app.log("app", "exit Down");
-
-        }
         return true;
     }
 

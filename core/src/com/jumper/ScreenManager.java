@@ -1,7 +1,6 @@
 package com.jumper;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.IntMap;
 
 /**

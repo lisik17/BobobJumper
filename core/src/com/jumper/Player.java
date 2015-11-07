@@ -135,21 +135,22 @@ public class Player extends Actor {
 
             bodyPlayer.setTransform(0, 10, 0);
 
+            HighScore.updateScore(Resources.getScore());
+            Gdx.app.log("app",String.valueOf(HighScore.getHighScore()));
+
             Resources.getFont().setStateGameOver();
         }
     }
 
     private void delayedGoToMenu() {
-        Gdx.app.log("app", "game over");
 
         Timer t = new Timer();
         t.scheduleTask(new Task() {
             @Override
             public void run() {
-                Gdx.app.log("app", "run");
                 ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
             }
-        }, 3);
+        }, 2.5f);
     }
 
     public void dispose(){

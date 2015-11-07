@@ -9,6 +9,11 @@ import com.gushikustudios.rube.RubeScene;
 import com.gushikustudios.rube.loader.RubeSceneAsyncLoader;
 import com.gushikustudios.rube.loader.RubeSceneLoader;
 
+import java.io.File;
+import java.nio.file.Paths;
+
+import sun.rmi.runtime.Log;
+
 
 public class GameJumper extends BasicScreen implements Screen{
 
@@ -41,6 +46,7 @@ public class GameJumper extends BasicScreen implements Screen{
 
 		player = new Player();
 		wall = new Wall();
+		Resources.setScore(0);
 
 		stairsFactory = new StairsFactory();
 		spiralFactory = new SpiralFactory();

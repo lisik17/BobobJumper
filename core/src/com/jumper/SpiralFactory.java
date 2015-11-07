@@ -23,6 +23,7 @@ public class SpiralFactory {
             return;
         }
         spiral = spiralArray.get(0);
+
         if( spiral.readyToBeDestroyed()){
             spiralArray.removeValue(spiral,true);
             spiral.destroySpiral();

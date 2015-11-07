@@ -1,14 +1,11 @@
-package com.jumper;
+package com.jumper.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -16,6 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.jumper.Constants;
+import com.jumper.InputController;
+import com.jumper.ScreenManager;
 
 
 /**
@@ -48,7 +48,7 @@ public class Menu implements Screen {
         black = new BitmapFont(Gdx.files.internal("font/black.fnt"),false);
 
         table = new Table(skin);
-        table.setBounds(0,0,Constants.SCREEN_PIXELS_SIZE_WIDTH,Constants.SCREEN_PIXELS_SIZE_HEIGHT);
+        table.setBounds(0,0, Constants.SCREEN_PIXELS_SIZE_WIDTH,Constants.SCREEN_PIXELS_SIZE_HEIGHT);
 
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.up = skin.getDrawable("soundOff");

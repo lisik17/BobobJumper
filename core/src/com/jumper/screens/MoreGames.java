@@ -1,7 +1,8 @@
-package com.jumper;
+package com.jumper.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.jumper.BasicScreen;
 
 /**
  * Created by Roma-Alisa on 26/10/15.

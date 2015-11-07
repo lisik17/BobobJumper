@@ -73,7 +73,7 @@ public class Spiral extends Actor {
 
     public boolean readyToBeDestroyed(){
 
-        return (Resources.getPlayer().getBodyPlayer().getPosition().y -20 > bodySpiral.getPosition().y);
+        return (Resources.getPlayer().getBodyPlayer().getPosition().y -5 > bodySpiral.getPosition().y);
     }
 
     private void setPicture(){

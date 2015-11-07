@@ -19,7 +19,7 @@ public class ScreenManager {
         MENU {
             @Override
             protected com.badlogic.gdx.Screen getScreenInstance() {
-               return new Menu();
+               return new com.jumper.screens.Menu();
             }
         },
 
@@ -29,15 +29,15 @@ public class ScreenManager {
         },
 
         COOL_STAFF{
-            protected com.badlogic.gdx.Screen getScreenInstance() {return new CoolStaff();}
+            protected com.badlogic.gdx.Screen getScreenInstance() {return new com.jumper.screens.CoolStaff();}
         },
 
         SETTINGS{
-            protected com.badlogic.gdx.Screen getScreenInstance() {return new Settings();}
+            protected com.badlogic.gdx.Screen getScreenInstance() {return new com.jumper.screens.Settings();}
         },
 
         MORE_GAMES{
-            protected com.badlogic.gdx.Screen getScreenInstance() {return new MoreGames();}
+            protected com.badlogic.gdx.Screen getScreenInstance() {return new com.jumper.screens.MoreGames();}
         };
 
         protected abstract com.badlogic.gdx.Screen getScreenInstance();

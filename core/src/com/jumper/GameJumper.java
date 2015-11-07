@@ -29,9 +29,9 @@ public class GameJumper extends BasicScreen implements Screen{
 	RubeScene scene;
 	private AssetManager mAssetManager;
 
-	public GameJumper(Menu context) {
+	public GameJumper() {
 		//Gdx.input.setCatchMenuKey(true);
-		Resources.setMenuInstance(context);
+		//Resources.setMenuInstance(context);
 	}
 
 	@Override

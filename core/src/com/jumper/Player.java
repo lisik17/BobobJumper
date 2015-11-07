@@ -147,7 +147,7 @@ public class Player extends Actor {
             @Override
             public void run() {
                 Gdx.app.log("app", "run");
-                ((Game) Gdx.app.getApplicationListener()).setScreen(Resources.getMenuInstance());
+                ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
             }
         }, 3);
     }

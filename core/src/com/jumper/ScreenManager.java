@@ -26,11 +26,19 @@ public class ScreenManager {
 
         GAME {
             @Override
-            protected com.badlogic.gdx.Screen getScreenInstance() {
-                return new GameJumper(new Menu());
-                //return null;
-            }
+            protected com.badlogic.gdx.Screen getScreenInstance() {return new GameJumper();}
+        },
 
+        COOL_STAFF{
+            protected com.badlogic.gdx.Screen getScreenInstance() {return new CoolStaff();}
+        },
+
+        SETTINGS{
+            protected com.badlogic.gdx.Screen getScreenInstance() {return new Settings();}
+        },
+
+        MORE_GAMES{
+            protected com.badlogic.gdx.Screen getScreenInstance() {return new MoreGames();}
         };
 
         protected abstract com.badlogic.gdx.Screen getScreenInstance();

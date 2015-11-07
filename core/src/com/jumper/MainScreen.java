@@ -11,9 +11,6 @@ public class MainScreen extends Game {
     public void create() {
         ScreenManager.getInstance().initialize(this);
         ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
-
-        //Resources.setBasicScreen(this);
-        //this.setScreen(new Menu());
     }
 
     @Override

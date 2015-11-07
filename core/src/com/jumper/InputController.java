@@ -45,19 +45,27 @@ public class InputController implements InputProcessor {
     @Override
     public boolean keyUp(int keycode) {
 
+        onBackKeyUp(keycode);
+        return true;
+    }
+
+    private void onBackKeyUp(int keycode) {
         if ((keycode == Input.Keys.ESCAPE) || (keycode == Input.Keys.BACK) ) {
 
-            if (ScreenManager.getInstance().getCurrentScreen() == ScreenManager.CurrentScreen.GAME) {
-                ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
-                return true;
-            }
-            if (ScreenManager.getInstance().getCurrentScreen() == ScreenManager.CurrentScreen.MENU) {
-                Gdx.app.exit();
-                return true;
+            switch (ScreenManager.getInstance().getCurrentScreen()){
+                case MENU :  Gdx.app.exit();
+                    break;
+                case GAME : ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
+                    break;
+                case COOL_STAFF : ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
+                    break;
+                case SETTINGS : ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
+                    break;
+                case MORE_GAMES : ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
+                    break;
+                default : Gdx.app.exit();
             }
         }
-
-        return true;
     }
 
     @Override
@@ -67,37 +75,21 @@ public class InputController implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        //vecTouchDownCoordinates.set(screenX, screenY, 0);
-        //camera.unproject(vecTouchDownCoordinates);
-
-        //System.out.println("Down" + vecTouchDownCoordinates.x);
-
-
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        //vecTouchUpCoordinates.set(screenX, screenY, 0);
-        //camera.unproject(vecTouchUpCoordinates);
-
         movePlayer();
 
         return true;
     }
 
     private void movePlayer() {
-        //bodyPlayer.setLinearVelocity((vecTouchUpCoordinates.x - vecTouchDownCoordinates.x) * 1f, (vecTouchUpCoordinates.y - vecTouchDownCoordinates.y) * 1f);
-/*        if(vecTouchUpCoordinates.x < vecTouchDownCoordinates.x) {
-            bodyPlayer.setAngularVelocity(2);
-        }else{
-            bodyPlayer.setAngularVelocity(-2);
-        }*/
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        //System.out.println("dragged");
         return true;
     }
 

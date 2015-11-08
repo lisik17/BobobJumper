@@ -63,27 +63,24 @@ public class GameJumper extends BasicScreen implements Screen{
 		Resources.setSpiralFactory(spiralFactory);
 
 		background = new Background();
-		//collisionManager = new CollisionManager();
 		collisionManager = new CollisionManager();
 
-		//SoundManager.getInstance().playSound();
-		//Gdx.audio.newSound(Gdx.files.internal("sound/coin.mp3")).play();
 		AssetManager assetManager = new AssetManager();
 
 		SoundManager.loadSounds();
 
+/*
 		if(assetManager.isLoaded("sound/coin.mp3")) {
 			sound = assetManager.get("sound/coin.mp3", Sound.class);
-			//sound.play();
 		}else{
-			//assetManager.finishLoading();
 			Gdx.app.log("app","not loaded yet");
 		}
+*/
 
-		//collisionManager = CollisionManager.getInstance();
 
 		//animation = new AnimationManager();
 		font = new Font();
+		font.setStateGamePlay();
 		Resources.setFont(font);
 
 		earth = new Earth();

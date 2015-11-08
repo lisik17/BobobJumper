@@ -34,7 +34,7 @@ public class Font extends Actor{
     }
 
     private enum State{
-        NONE,GAME_OVER,UPDATE_SCORE;
+        GAME_PLAY,NONE,GAME_OVER,UPDATE_SCORE,HIGH_SCORE;
     }
 
     public void create () {
@@ -74,7 +74,9 @@ public class Font extends Actor{
             //}
         }
 
-        font.draw(batch, Long.toString(Resources.getScore()), Constants.SCREEN_PIXELS_SIZE_WIDTH * .1f, Constants.SCREEN_PIXELS_SIZE_HEIGHT * .9f);
+        if(state == State.GAME_PLAY) {
+            font.draw(batch, Long.toString(Resources.getScore()), Constants.SCREEN_PIXELS_SIZE_WIDTH * .1f, Constants.SCREEN_PIXELS_SIZE_HEIGHT * .9f);
+        }
 
         if(state == State.GAME_OVER) {
             setStringMessage("your score is : " + Resources.getScore());
@@ -86,10 +88,16 @@ public class Font extends Actor{
             font.draw(batch,message, Constants.SCREEN_PIXELS_SIZE_WIDTH/2 - layout.width / 2, Constants.SCREEN_PIXELS_SIZE_HEIGHT/2);
         }
 
+        if(state == State.HIGH_SCORE){
+            setStringMessage("High Score : " + HighScore.getHighScore());
+            layout.setText(font, message);
+            font.draw(batch, message, Constants.SCREEN_PIXELS_SIZE_WIDTH / 2 - layout.width / 2, Constants.SCREEN_PIXELS_SIZE_HEIGHT * .6f);
+        }
+
         batch.end();
     }
 
-
+    public void setStateGamePlay(){ state = State.GAME_PLAY; }
 
     public void setStateGameOver(){
         state = State.GAME_OVER;
@@ -97,6 +105,10 @@ public class Font extends Actor{
 
     public void setStateUpdateScore(){
         state = State.UPDATE_SCORE;
+    }
+
+    public void setStateHighScore(){
+        state = State.HIGH_SCORE;
     }
 
     public void setDeltaFade(float delta) {

@@ -66,7 +66,7 @@ public class Stair extends Actor{
 
     private void chooseStairToMoveLeftRight() {
         if(MathUtils.random(5) == 2){
-            //bodyStair.setLinearVelocity(3,0);
+            bodyStair.setLinearVelocity(3,0);
         }
     }
 

@@ -123,6 +123,7 @@ public class CollisionManager {
     private void onSpiralCollMiddle(){
         if(collisionType == State.COL_SPIRAL){
             if(playerAboveSpiral()) {
+                SoundManager.getInstance().playSound();
                 Resources.getPlayer().boost();
             }
         }
@@ -165,7 +166,8 @@ public class CollisionManager {
             bodyB.setAngularVelocity(3);
 
             //Font.applyFontEffect();
-            Resources.getFont().setStateUpdateScore();
+
+            //Resources.getFont().setStateUpdateScore();
 
             //SoundManager.getInstance().playSound();
             //GameJumper.sound.play();

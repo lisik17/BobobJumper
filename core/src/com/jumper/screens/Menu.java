@@ -14,7 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jumper.Constants;
+import com.jumper.Font;
 import com.jumper.InputController;
+import com.jumper.Resources;
 import com.jumper.ScreenManager;
 
 
@@ -129,6 +131,10 @@ public class Menu implements Screen {
         stage.addActor(buttonSettings);
         stage.addActor(buttonMoreGames);
 
+        Resources.setFont(new Font());
+        Resources.getFont().setStateHighScore();
+        //stage.addActor(Resources.getFont());
+
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(new InputController());
@@ -141,6 +147,7 @@ public class Menu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act();
+        Resources.getFont().act();
         stage.draw();
   }
 

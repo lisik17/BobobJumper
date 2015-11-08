@@ -48,8 +48,6 @@ public class SoundManager {
 
     public static SoundManager getInstance(){
 
-
-
         if(null == instance){
             instance = new SoundManager();
         }

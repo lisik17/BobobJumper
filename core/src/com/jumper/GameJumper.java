@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Sound;
 import com.gushikustudios.rube.RubeScene;
 import com.gushikustudios.rube.loader.RubeSceneAsyncLoader;
 import com.gushikustudios.rube.loader.RubeSceneLoader;
@@ -26,8 +27,11 @@ public class GameJumper extends BasicScreen implements Screen{
 	private Background background;
 	private CollisionManager collisionManager;
 	private Earth earth;
+	private SoundManager soundManager;
 	//private AnimationManager animation;
 	private Font font;
+
+	public static Sound sound;
 
 
 	RubeSceneLoader loader;
@@ -44,6 +48,8 @@ public class GameJumper extends BasicScreen implements Screen{
 	public void show(){
 		super.create();
 
+		//SoundManager.getInstance().playSound();
+
 		player = new Player();
 		wall = new Wall();
 		Resources.setScore(0);
@@ -52,10 +58,30 @@ public class GameJumper extends BasicScreen implements Screen{
 		spiralFactory = new SpiralFactory();
 		coinsFactory = new CoinsFactory();
 
+		soundManager = SoundManager.getInstance();
+
 		Resources.setSpiralFactory(spiralFactory);
 
 		background = new Background();
+		//collisionManager = new CollisionManager();
 		collisionManager = new CollisionManager();
+
+		//SoundManager.getInstance().playSound();
+		//Gdx.audio.newSound(Gdx.files.internal("sound/coin.mp3")).play();
+		AssetManager assetManager = new AssetManager();
+
+		SoundManager.loadSounds();
+
+		if(assetManager.isLoaded("sound/coin.mp3")) {
+			sound = assetManager.get("sound/coin.mp3", Sound.class);
+			//sound.play();
+		}else{
+			//assetManager.finishLoading();
+			Gdx.app.log("app","not loaded yet");
+		}
+
+		//collisionManager = CollisionManager.getInstance();
+
 		//animation = new AnimationManager();
 		font = new Font();
 		Resources.setFont(font);
@@ -81,6 +107,8 @@ public class GameJumper extends BasicScreen implements Screen{
 
 	@Override
 	public void render(float delta) {
+
+
 
 		super.render();
 		background.act(10f);
@@ -124,6 +152,7 @@ public class GameJumper extends BasicScreen implements Screen{
 		wall.dispose();
 		background.dispose();
 		earth.dispose();
+		//collisionManager.dispose();
 		//animation.dispose();
 
 		super.dispose();

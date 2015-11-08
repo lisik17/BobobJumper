@@ -1,6 +1,7 @@
 package com.jumper;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -14,12 +15,29 @@ import com.badlogic.gdx.physics.box2d.World;
  */
 public class CollisionManager {
 
+    private static CollisionManager instance;
+    //private State collisionType;
+
     private Body bodyA;
     private Body bodyB;
-    private State state;
+    private State collisionType;
 
-    private enum State{
-        COL_COIN,COL_STAIR,COL_SPIRAL,NONE;
+    public enum State{
+        COL_COIN,
+        COL_STAIR,
+        COL_SPIRAL,
+        NONE;
+    }
+
+    public static CollisionManager getInstance(){
+        if(null == instance){
+            instance = new CollisionManager();
+        }
+        return instance;
+    }
+
+    public State getCollisionType(){
+        return collisionType;
     }
 
     private void setCollisionBodies(Contact contact){
@@ -28,9 +46,11 @@ public class CollisionManager {
     }
 
     public CollisionManager(){
-
+        collisionType = State.NONE;
         setContactListener(Resources.getWorld());
     }
+
+
 
     private void setContactListener(World world) {
         world.setContactListener(new ContactListener() {
@@ -71,19 +91,20 @@ public class CollisionManager {
     }
 
     private void onStairCollPost(Contact contact) {
-        if(state == State.COL_STAIR) {
+        if(collisionType == State.COL_STAIR) {
             disableStairContactIfNeeded(contact);
         }
     }
 
     private void onCoinCollMiddle() {
-        if(state == State.COL_COIN){
+        if(collisionType == State.COL_COIN){
+            SoundManager.getInstance().playSound();
             Resources.setScore(Resources.getScore() + 5);
         }
     }
 
     private void onStairCollMiddle() {
-        if(state == State.COL_STAIR){
+        if(collisionType == State.COL_STAIR){
             if(playerAboveStair()) {
                 Resources.getPlayer().jumpUp();
             }
@@ -100,7 +121,7 @@ public class CollisionManager {
 
 
     private void onSpiralCollMiddle(){
-        if(state == State.COL_SPIRAL){
+        if(collisionType == State.COL_SPIRAL){
             if(playerAboveSpiral()) {
                 Resources.getPlayer().boost();
             }
@@ -113,7 +134,7 @@ public class CollisionManager {
     }
 
     private void onStairCollStart(Contact contact) {
-        if (state == State.COL_STAIR) {
+        if (collisionType == State.COL_STAIR) {
             disableStairContactIfNeeded(contact);
         }
     }
@@ -125,7 +146,7 @@ public class CollisionManager {
     }
 
     private void onSpiralCollStart(Contact contact) {
-        if(state == State.COL_SPIRAL){
+        if(collisionType == State.COL_SPIRAL){
             //bodyA.applyLinearImpulse(0, 30, bodyA.getPosition().x, bodyA.getPosition().y, true);
 
 
@@ -139,12 +160,17 @@ public class CollisionManager {
     }
 
     private void onCoinCollStart(Contact contact) {
-        if(state == State.COL_COIN){
+        if(collisionType == State.COL_COIN) {
             bodyB.setLinearVelocity(0, -15);
             bodyB.setAngularVelocity(3);
 
             //Font.applyFontEffect();
             Resources.getFont().setStateUpdateScore();
+
+            //SoundManager.getInstance().playSound();
+            //GameJumper.sound.play();
+            //Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/storm.mp3"));
+            //sound.play();
 
             contact.setEnabled(false);
         }
@@ -153,19 +179,23 @@ public class CollisionManager {
     private void detectCollisionState() {
         if(bodyA != null && bodyB != null){
             if (bodyB.getUserData() == Constants.STR_COIN || bodyA.getUserData() == Constants.STR_COIN) {
-                state = State.COL_COIN;
+                collisionType = State.COL_COIN;
                 return;
             }
             if (bodyB.getUserData() == Constants.STR_STAIR || bodyA.getUserData() == Constants.STR_STAIR) {
-                state = State.COL_STAIR;
+                collisionType = State.COL_STAIR;
                 return;
             }
             if (bodyB.getUserData() == Constants.STR_SPIRAL || bodyA.getUserData() == Constants.STR_SPIRAL) {
-                state = State.COL_SPIRAL;
+                collisionType = State.COL_SPIRAL;
                 return;
             }
         }
-        state = State.NONE;
+        collisionType = State.NONE;
+    }
+
+    public void dispose(){
+        instance = null;
     }
 
 

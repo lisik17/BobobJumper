@@ -12,12 +12,16 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jumper.Constants;
 import com.jumper.Font;
+import com.jumper.GameDialog;
 import com.jumper.InputController;
 import com.jumper.Resources;
 import com.jumper.ScreenManager;
+
+import java.awt.Label;
 
 
 /**
@@ -27,7 +31,7 @@ public class Menu implements Screen {
 
     private Stage stage;
     private TextureAtlas atlas;
-    private Skin skin;
+    private Skin skin,dialogSkin;
     private Table table;
     private TextButton buttonPlay, buttonExit, buttonCoolStaff, buttonSettings, buttonMoreGames;
     private BitmapFont white,black;
@@ -82,7 +86,20 @@ public class Menu implements Screen {
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+                dialogSkin = new Skin(Gdx.files.internal("skin/theSkin.js"));
+                Window.WindowStyle ws = new Window.WindowStyle();
+                ws.titleFont = white;
+                dialogSkin.add("default", ws);
+                //TextButton.TextButtonStyle ts = new TextButton.TextButtonStyle();
+                dialogSkin.add("default",textButtonStyle);
+                // other ws properties here
+                //skin.add("default", ws);
+
+                //Label testLabel = new Label("", );
+
+                GameDialog gameDialog = new GameDialog("confirm exit",dialogSkin);
+                gameDialog.show(stage);
+                //Gdx.app.exit();
             }
         });
 

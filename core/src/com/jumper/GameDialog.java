@@ -1,13 +1,36 @@
 package com.jumper;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 /**
  * Created by Roma-Alisa on 08/11/15.
  */
 public class GameDialog extends Dialog{
+
+    private Skin skin;
+    private WindowStyle windowStyle;
+    private TextButtonStyle buttonStyle;
+    private TextureAtlas atlas;
+    private BitmapFont whiteFont;
+
+    {
+        atlas = new TextureAtlas(Gdx.files.internal("button/button.pack"));
+        skin = new Skin(atlas);
+        whiteFont = new BitmapFont(Gdx.files.internal("font/white.fnt"),false);
+        buttonStyle = new TextButtonStyle();
+
+        buttonStyle.up = skin.getDrawable("soundOff");
+        buttonStyle.down = skin.getDrawable("soundOff");
+        buttonStyle.checked = skin.getDrawable("soundOff");
+        buttonStyle.pressedOffsetX = 1;
+        buttonStyle.pressedOffsetY = -1;
+        buttonStyle.font = whiteFont;
+    }
 
 
     public GameDialog(String title, Skin skin) {

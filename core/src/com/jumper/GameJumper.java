@@ -22,6 +22,8 @@ public class GameJumper extends BasicScreen implements Screen{
 	private StairsFactory stairsFactory;
 	private SpiralFactory spiralFactory;
 	private CoinsFactory coinsFactory;
+	private SnowBallFactory snowBallFactory;
+
 	private Player player;
 	private Wall wall;
 	private Background background;
@@ -57,10 +59,13 @@ public class GameJumper extends BasicScreen implements Screen{
 		stairsFactory = new StairsFactory();
 		spiralFactory = new SpiralFactory();
 		coinsFactory = new CoinsFactory();
+		snowBallFactory = new SnowBallFactory();
+
 
 		soundManager = SoundManager.getInstance();
 
 		Resources.setSpiralFactory(spiralFactory);
+		Resources.setSnowBallFactory(snowBallFactory);
 
 		background = new Background();
 		collisionManager = new CollisionManager();
@@ -108,10 +113,11 @@ public class GameJumper extends BasicScreen implements Screen{
 
 
 		super.render();
-		background.act(10f);
+		//background.act(10f);
 		stairsFactory.act(10f);
 		spiralFactory.act(10f);
 		coinsFactory.act(10f);
+		snowBallFactory.act(10f);
 		wall.act(10f);
 		player.act(10f);
 		earth.act(10f);
@@ -143,11 +149,14 @@ public class GameJumper extends BasicScreen implements Screen{
 	@Override
 	public void dispose() {
 		player.dispose();
+
 		stairsFactory.dispose();
 		coinsFactory.dispose();
+		snowBallFactory.dispose();
 		spiralFactory.dispose();
+
 		wall.dispose();
-		background.dispose();
+		//background.dispose();
 		earth.dispose();
 		//collisionManager.dispose();
 		//animation.dispose();

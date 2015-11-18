@@ -86,6 +86,7 @@ public class Menu implements Screen {
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
                 dialogSkin = new Skin(Gdx.files.internal("skin/theSkin.js"));
                 Window.WindowStyle ws = new Window.WindowStyle();
                 ws.titleFont = white;

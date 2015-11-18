@@ -105,6 +105,7 @@ public class StairsFactory extends Actor {
 
 
             addSpiral(xPos  + MathUtils.random(Constants.STAIR_LENGTH/2f - .5f), yPos);
+            Resources.getSnowBallFactory().addSnowBall(xPos,yPos + 3);
 
             maxStairCoordinateY = maxStairCoordinateY + Constants.SPACE_BETWEEN_STAIRS_Y;
             stairArray.add(stair);

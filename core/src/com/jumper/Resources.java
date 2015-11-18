@@ -16,7 +16,16 @@ public class Resources {
     private static OrthographicCamera camera;
     private static long score = 0;
     private static SpiralFactory spiralFactory;
+    private static SnowBallFactory snowBallFactory;
     private static Font font;
+
+    public static SnowBallFactory getSnowBallFactory() {
+        return snowBallFactory;
+    }
+
+    public static void setSnowBallFactory(SnowBallFactory snowBallFactory) {
+        Resources.snowBallFactory = snowBallFactory;
+    }
 
     public static Font getFont() {
         return font;

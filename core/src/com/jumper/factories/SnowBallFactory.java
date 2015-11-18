@@ -2,21 +2,30 @@ package com.jumper.factories;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pool;
 import com.jumper.Resources;
 import com.jumper.entities.SnowBall;
-
 import java.util.Random;
 
 /**
  * Created by Roma-Alisa on 18/11/15.
  */
 public class SnowBallFactory extends Actor {
+
     private Array<SnowBall> snowBallArray;
+    private Pool<SnowBall> snowBallPool;
+
     private SnowBall snowBall;
     private Random random;
 
     public SnowBallFactory() {
         snowBallArray = new Array<SnowBall>();
+        snowBallPool = new Pool<SnowBall>() {
+            @Override
+            protected SnowBall newObject() {
+                return new SnowBall();
+            }
+        };
         random = new Random();
     }
 
@@ -25,8 +34,8 @@ public class SnowBallFactory extends Actor {
             return;
         }
 
-        snowBall = new SnowBall();
-        snowBall.setPosition(x, y);
+        snowBall = snowBallPool.obtain();
+        snowBall.init(x,y);
         snowBallArray.add(snowBall);
     }
 
@@ -46,14 +55,14 @@ public class SnowBallFactory extends Actor {
         snowBall = snowBallArray.get(0);
 
         if(Resources.getPlayer().getBodyPlayer().getPosition().y - 20 > snowBall.getBodySnowBall().getPosition().y){
-            snowBallArray.removeValue(snowBall,true);
-            snowBall.destroySnowBall();
-            snowBall.dispose();
+            snowBallArray.removeValue(snowBall, true);
+            snowBallPool.free(snowBall);
         }
     }
 
     public void dispose(){
         for(SnowBall snowBall : snowBallArray){
+            snowBall.destroySnowBall();
             snowBall.dispose();
         }
     }

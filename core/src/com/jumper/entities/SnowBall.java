@@ -10,13 +10,14 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Pool;
 import com.jumper.Constants;
 import com.jumper.Resources;
 
 /**
  * Created by Roma-Alisa on 18/11/15.
  */
-public class SnowBall extends Actor{
+public class SnowBall extends Actor implements Pool.Poolable{
     private BodyDef bodyDef;
     private CircleShape circleShape;
     private FixtureDef fixtureDef;
@@ -46,7 +47,7 @@ public class SnowBall extends Actor{
         bodySnowBall = Resources.getWorld().createBody(bodyDef);
         bodySnowBall.createFixture(fixtureDef);
 
-        //bodySnowBall.setUserData(Constants.STR_COIN);
+        bodySnowBall.setUserData(Constants.STR_SNOW_BALL);
 
         setPicture();
     }
@@ -80,6 +81,17 @@ public class SnowBall extends Actor{
         batch.end();
     }
 
+    public void init(float x, float y) {
+        setPosition(x, y);
+    }
+
+    @Override
+    public void reset() {
+        setPosition(0, -10);
+        bodySnowBall.setLinearVelocity(0, 0);
+        bodySnowBall.setAngularVelocity(0);
+    }
+
     public void destroySnowBall(){
         //if(Resources.getPlayer().getBodyPlayer().getPosition().y - 14 > bodyCoin.getPosition().y) {
         if (bodySnowBall != null && !Resources.getWorld().isLocked()) {
@@ -94,4 +106,6 @@ public class SnowBall extends Actor{
         batch.dispose();
         sprite.getTexture().dispose();
     }
+
+
 }

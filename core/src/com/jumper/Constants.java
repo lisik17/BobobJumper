@@ -49,6 +49,9 @@ public class Constants {
     public static float PLAYER_HEIGHT = 3f;
     public static String STR_PLAYER = "player";
 
+    //SNOW_BALL
+    public static String STR_SNOW_BALL = "snow_ball";
+
     //FONT
     public static float STRING_SIZE_RATIO = Gdx.graphics.getWidth()/2;
 

@@ -1,6 +1,5 @@
 package com.jumper.factories;
 
-
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;

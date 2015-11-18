@@ -11,13 +11,14 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Pool;
 import com.jumper.Constants;
 import com.jumper.Resources;
 
 /**
  * Created by Roma-Alisa on 9/24/2015.
  */
-public class Stair extends Actor{
+public class Stair extends Actor implements Pool.Poolable{
 
     private BodyDef bodyDef;
     private PolygonShape polygonShape;
@@ -32,7 +33,10 @@ public class Stair extends Actor{
 
     public Stair(){
         createBodyStage(5 / 2f, .5f / 2f);
+        setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
         bodyStair.setUserData(Constants.STR_STAIR);
+
+        //Gdx.app.log("app", "c'tor");
     }
 
     @Override
@@ -127,6 +131,19 @@ public class Stair extends Actor{
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
     }
+
+    public void init(float x, float y){
+        setPosition(x, y);
+        //setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
+    }
+
+    @Override
+    public void reset() {
+        setPosition(-10, -10);
+        bodyStair.setAngularVelocity(0);
+        bodyStair.setLinearVelocity(0, 0);
+    }
+
 
     @Override
     public void act(float delta) {

@@ -17,7 +17,7 @@ public class CoinsFactory extends Actor {
     private Array<Coin> coinArray;
     private Pool<Coin> coinPool;
 
-    private com.jumper.entities.Coin coin;
+    private Coin coin;
     private int maxCoinCoordinateY;
 
     public CoinsFactory(){
@@ -39,16 +39,14 @@ public class CoinsFactory extends Actor {
         addCoin();
         removeCoin();
 
-        for(com.jumper.entities.Coin coin : coinArray){
+        for(Coin coin : coinArray){
             coin.draw();
         }
     }
 
     private void addCoin(){
         if(Camera.cordsToMeters(Resources.getCamera()).y > this.maxCoinCoordinateY - 20){
-            //coin = new Coin();
             coin = coinPool.obtain();
-            //coin.setPosition(MathUtils.random(-5,5),this.maxCoinCoordinateY + 5 + Constants.SPACE_BETWEEN_STAIRS_Y);
             coin.init(MathUtils.random(-5,5),this.maxCoinCoordinateY + 5 + Constants.SPACE_BETWEEN_STAIRS_Y);
             maxCoinCoordinateY = maxCoinCoordinateY + Constants.SPACE_BETWEEN_COINS_Y;
             coinArray.add(coin);
@@ -61,9 +59,6 @@ public class CoinsFactory extends Actor {
         if(Resources.getPlayer().getBodyPlayer().getPosition().y - 20 > coin.getBodyCoin().getPosition().y) {
             coinArray.removeValue(coin,true);
             coinPool.free(coin);
-
-            //coin.destroyCoin();
-            //coin.dispose();
         }
     }
 

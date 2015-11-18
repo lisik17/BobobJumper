@@ -17,7 +17,7 @@ import com.jumper.Resources;
 /**
  * Created by Roma-Alisa on 10/7/2015.
  */
-public class Coin extends Actor implements Pool.Poolable{
+public class Coin extends Actor implements Pool.Poolable {
 
     private BodyDef bodyDef;
     private CircleShape circleShape;
@@ -28,7 +28,7 @@ public class Coin extends Actor implements Pool.Poolable{
     private Texture texture;
     private Sprite sprite;
 
-    public Coin(){
+    public Coin() {
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
         bodyDef.position.set(0, 0);
@@ -54,11 +54,16 @@ public class Coin extends Actor implements Pool.Poolable{
 
     }
 
-    public Body getBodyCoin(){
+    public static void onCollision(Body body){
+        body.setLinearVelocity(0, -15);
+        body.setAngularVelocity(3);
+    }
+
+    public Body getBodyCoin() {
         return bodyCoin;
     }
 
-    private void setPicture(){
+    private void setPicture() {
         batch = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("coin.png"));
         sprite = new Sprite(texture);
@@ -68,7 +73,7 @@ public class Coin extends Actor implements Pool.Poolable{
         sprite.setCenter(0, 0);
     }
 
-    public void draw(){
+    public void draw() {
         batch.setProjectionMatrix(Resources.getCamera().combined);
         batch.begin();
         sprite.setPosition(bodyCoin.getPosition().x - sprite.getWidth() / 2, bodyCoin.getPosition().y - sprite.getHeight() / 2);
@@ -77,8 +82,13 @@ public class Coin extends Actor implements Pool.Poolable{
         batch.end();
     }
 
-    public void init(float x, float y){
-        setPosition(x,y);
+    public void init(float x, float y) {
+        setPosition(x, y);
+    }
+
+    @Override
+    public void reset() {
+        setPosition(0, -10);
         bodyCoin.setLinearVelocity(0, 0);
         bodyCoin.setAngularVelocity(3);
     }
@@ -88,25 +98,20 @@ public class Coin extends Actor implements Pool.Poolable{
         bodyCoin.setTransform(x, y, 0);
     }
 
-    public void destroyCoin(){
+    public void destroyCoin() {
         //if(Resources.getPlayer().getBodyPlayer().getPosition().y - 14 > bodyCoin.getPosition().y) {
-            if (bodyCoin != null && !Resources.getWorld().isLocked()) {
-                Resources.getWorld().destroyBody(bodyCoin);
-                bodyCoin = null;
-            }
+        if (bodyCoin != null && !Resources.getWorld().isLocked()) {
+            Resources.getWorld().destroyBody(bodyCoin);
+            bodyCoin = null;
+        }
         //}
     }
 
-    public void dispose(){
+    public void dispose() {
         circleShape.dispose();
         batch.dispose();
         sprite.getTexture().dispose();
     }
 
 
-
-    @Override
-    public void reset() {
-        setPosition(0,0);
-    }
 }

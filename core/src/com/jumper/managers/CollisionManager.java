@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jumper.Constants;
 import com.jumper.Resources;
+import com.jumper.entities.Coin;
 
 /**
  * Created by Roma-Alisa on 10/1/2015.
@@ -162,23 +163,7 @@ public class CollisionManager {
 
     private void onCoinCollStart(Contact contact) {
         if(collisionType == State.COL_COIN) {
-            bodyB.setLinearVelocity(0, -15);
-            bodyB.setAngularVelocity(3);
-
-            Gdx.app.log("app", "colission !!!!");
-            Gdx.app.log("app","A "+bodyA.getUserData().toString());
-            Gdx.app.log("app","B "+ bodyB.getUserData().toString());
-
-
-            //Font.applyFontEffect();
-
-            //Resources.getFont().setStateUpdateScore();
-
-            //SoundManager.getInstance().playSound();
-            //GameJumper.sound.play();
-            //Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/storm.mp3"));
-            //sound.play();
-
+            Coin.onCollision(bodyB);
             contact.setEnabled(false);
         }
     }

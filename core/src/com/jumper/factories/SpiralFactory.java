@@ -1,21 +1,40 @@
 package com.jumper.factories;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pool;
+import com.jumper.entities.Spiral;
 
 /**
  * Created by Roma-Alisa on 19/10/15.
  */
 public class SpiralFactory {
-    private Array<com.jumper.entities.Spiral> spiralArray;
-    private com.jumper.entities.Spiral spiral;
+
+    private Array<Spiral> spiralArray;
+    private Pool<Spiral> spiralPool;
+
+    private Spiral spiral;
 
     public SpiralFactory(){
-        spiralArray = new Array<com.jumper.entities.Spiral>();
+        spiralArray = new Array<Spiral>();
+        spiralPool = new Pool<Spiral>() {
+            @Override
+            protected Spiral newObject() {
+                return new Spiral();
+            }
+        };
     }
 
-    public void addSpiral(com.jumper.entities.Spiral spiral, float x, float y){
-        spiral.setPosition(x, y);
-        spiralArray.add(spiral);
+    public void addSpiral(float x, float y, boolean stairNotMovingLeftRight){
+        if (canCreateSpiralOnStair(stairNotMovingLeftRight)) {
+            spiral = spiralPool.obtain();
+            spiral.init(x,y);
+            spiralArray.add(spiral);
+        }
+    }
+
+    private boolean canCreateSpiralOnStair(boolean stairNotMovingLeftRight) {
+        return MathUtils.random(2) == 1 && stairNotMovingLeftRight;
     }
 
     public void removeSpiral(){
@@ -25,20 +44,20 @@ public class SpiralFactory {
         spiral = spiralArray.get(0);
 
         if( spiral.readyToBeDestroyed()){
-            spiralArray.removeValue(spiral,true);
-            spiral.destroySpiral();
-            spiral.dispose();
+            spiralArray.removeValue(spiral, true);
+            spiralPool.free(spiral);
         }
     }
 
     public void act(float delta) {
-        for(com.jumper.entities.Spiral spiral : spiralArray){
+        for(Spiral spiral : spiralArray){
             spiral.act(10f);
         }
     }
 
     public void dispose(){
-        for(com.jumper.entities.Spiral spiral: spiralArray){
+        for(Spiral spiral: spiralArray){
+            spiral.destroySpiral();
             spiral.dispose();
         }
     }

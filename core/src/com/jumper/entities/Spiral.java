@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Pool;
 import com.jumper.Constants;
 import com.jumper.Resources;
 
@@ -18,7 +19,7 @@ import static com.jumper.Constants.SPIRAL_PIC_WIDTH;
 /**
  * Created by Roma-Alisa on 19/10/15.
  */
-public class Spiral extends Actor {
+public class Spiral extends Actor implements Pool.Poolable{
     private BodyDef bodyDef;
     private PolygonShape polygonShape;
     private FixtureDef fixtureDef;
@@ -101,6 +102,17 @@ public class Spiral extends Actor {
         polygonShape.dispose();
         batch.dispose();
         sprite.getTexture().dispose();
+    }
+
+    public void init(float x, float y) {
+        setPosition(x, y);
+    }
+
+    @Override
+    public void reset() {
+        setPosition(0, -10);
+        bodySpiral.setLinearVelocity(0, 0);
+        bodySpiral.setAngularVelocity(0);
     }
 }
 

@@ -2,6 +2,7 @@ package com.jumper;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
+import com.jumper.factories.SnowBallFactory;
 import com.jumper.factories.SpiralFactory;
 
 /**
@@ -13,9 +14,10 @@ public class Resources {
     private static Player player;
     private static OrthographicCamera camera;
     private static long score = 0;
-    private static com.jumper.factories.SpiralFactory spiralFactory;
-    private static com.jumper.factories.SnowBallFactory snowBallFactory;
     private static Font font;
+
+    private static SpiralFactory spiralFactory;
+    private static SnowBallFactory snowBallFactory;
 
     public static com.jumper.factories.SnowBallFactory getSnowBallFactory() {
         return snowBallFactory;

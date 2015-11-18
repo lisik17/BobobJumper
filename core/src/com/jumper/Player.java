@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.jumper.managers.ScreenManager;
 
 
 /**
@@ -147,7 +148,9 @@ public class Player extends Actor {
         t.scheduleTask(new Task() {
             @Override
             public void run() {
-                com.jumper.managers.ScreenManager.getInstance().show(com.jumper.managers.ScreenManager.CurrentScreen.MENU);
+                if(ScreenManager.getInstance().getCurrentScreen() != ScreenManager.CurrentScreen.MENU) {
+                    ScreenManager.getInstance().show(com.jumper.managers.ScreenManager.CurrentScreen.MENU);
+                }
             }
         }, 2.5f);
     }

@@ -1,4 +1,4 @@
-package com.jumper;
+package com.jumper.screens;
 
 
 import com.badlogic.gdx.Gdx;
@@ -9,27 +9,34 @@ import com.badlogic.gdx.audio.Sound;
 import com.gushikustudios.rube.RubeScene;
 import com.gushikustudios.rube.loader.RubeSceneAsyncLoader;
 import com.gushikustudios.rube.loader.RubeSceneLoader;
-
-import java.io.File;
-import java.nio.file.Paths;
-
-import sun.rmi.runtime.Log;
+import com.jumper.Background;
+import com.jumper.BasicScreen;
+import com.jumper.Camera;
+import com.jumper.Font;
+import com.jumper.Player;
+import com.jumper.Resources;
+import com.jumper.entities.Wall;
+import com.jumper.factories.CoinsFactory;
+import com.jumper.factories.SnowBallFactory;
+import com.jumper.factories.StairsFactory;
+import com.jumper.managers.InputController;
+import com.jumper.managers.SoundManager;
 
 
 public class GameJumper extends BasicScreen implements Screen{
 
 	//private Stair stair;
-	private StairsFactory stairsFactory;
-	private SpiralFactory spiralFactory;
-	private CoinsFactory coinsFactory;
+	private com.jumper.factories.StairsFactory stairsFactory;
+	private com.jumper.factories.SpiralFactory spiralFactory;
+	private com.jumper.factories.CoinsFactory coinsFactory;
 	private SnowBallFactory snowBallFactory;
 
 	private Player player;
-	private Wall wall;
+	private com.jumper.entities.Wall wall;
 	private Background background;
-	private CollisionManager collisionManager;
-	private Earth earth;
-	private SoundManager soundManager;
+	private com.jumper.managers.CollisionManager collisionManager;
+	private com.jumper.entities.Earth earth;
+	private com.jumper.managers.SoundManager soundManager;
 	//private AnimationManager animation;
 	private Font font;
 
@@ -57,18 +64,18 @@ public class GameJumper extends BasicScreen implements Screen{
 		Resources.setScore(0);
 
 		stairsFactory = new StairsFactory();
-		spiralFactory = new SpiralFactory();
+		spiralFactory = new com.jumper.factories.SpiralFactory();
 		coinsFactory = new CoinsFactory();
-		snowBallFactory = new SnowBallFactory();
+		snowBallFactory = new com.jumper.factories.SnowBallFactory();
 
 
-		soundManager = SoundManager.getInstance();
+		soundManager = com.jumper.managers.SoundManager.getInstance();
 
 		Resources.setSpiralFactory(spiralFactory);
 		Resources.setSnowBallFactory(snowBallFactory);
 
 		background = new Background();
-		collisionManager = new CollisionManager();
+		collisionManager = new com.jumper.managers.CollisionManager();
 
 		AssetManager assetManager = new AssetManager();
 
@@ -88,7 +95,7 @@ public class GameJumper extends BasicScreen implements Screen{
 		font.setStateGamePlay();
 		Resources.setFont(font);
 
-		earth = new Earth();
+		earth = new com.jumper.entities.Earth();
 
 
 		Gdx.input.setInputProcessor(new InputController());

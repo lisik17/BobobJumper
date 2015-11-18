@@ -1,7 +1,9 @@
-package com.jumper;
+package com.jumper.factories;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.jumper.Resources;
+import com.jumper.entities.SnowBall;
 
 import java.util.Random;
 

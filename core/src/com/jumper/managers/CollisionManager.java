@@ -1,14 +1,14 @@
-package com.jumper;
+package com.jumper.managers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import com.jumper.Constants;
+import com.jumper.Resources;
 
 /**
  * Created by Roma-Alisa on 10/1/2015.
@@ -164,6 +164,11 @@ public class CollisionManager {
         if(collisionType == State.COL_COIN) {
             bodyB.setLinearVelocity(0, -15);
             bodyB.setAngularVelocity(3);
+
+            Gdx.app.log("app", "colission !!!!");
+            Gdx.app.log("app","A "+bodyA.getUserData().toString());
+            Gdx.app.log("app","B "+ bodyB.getUserData().toString());
+
 
             //Font.applyFontEffect();
 

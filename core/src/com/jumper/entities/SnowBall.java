@@ -1,4 +1,4 @@
-package com.jumper;
+package com.jumper.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +10,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.jumper.Constants;
+import com.jumper.Resources;
 
 /**
  * Created by Roma-Alisa on 18/11/15.
@@ -27,7 +29,7 @@ public class SnowBall extends Actor{
     public SnowBall(){
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(0,0);
+        bodyDef.position.set(0, 0);
 
         //ball shape
         circleShape = new CircleShape();
@@ -44,7 +46,7 @@ public class SnowBall extends Actor{
         bodySnowBall = Resources.getWorld().createBody(bodyDef);
         bodySnowBall.createFixture(fixtureDef);
 
-        bodySnowBall.setUserData(Constants.STR_COIN);
+        //bodySnowBall.setUserData(Constants.STR_COIN);
 
         setPicture();
     }

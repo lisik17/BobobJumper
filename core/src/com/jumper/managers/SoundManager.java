@@ -1,4 +1,4 @@
-package com.jumper;
+package com.jumper.managers;
 
 
 import com.badlogic.gdx.Gdx;

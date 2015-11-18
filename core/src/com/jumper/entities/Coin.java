@@ -1,4 +1,4 @@
-package com.jumper;
+package com.jumper.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,11 +10,14 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Pool;
+import com.jumper.Constants;
+import com.jumper.Resources;
 
 /**
  * Created by Roma-Alisa on 10/7/2015.
  */
-public class Coin extends Actor{
+public class Coin extends Actor implements Pool.Poolable{
 
     private BodyDef bodyDef;
     private CircleShape circleShape;
@@ -28,7 +31,7 @@ public class Coin extends Actor{
     public Coin(){
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(0,0);
+        bodyDef.position.set(0, 0);
 
         //ball shape
         circleShape = new CircleShape();
@@ -48,6 +51,7 @@ public class Coin extends Actor{
         bodyCoin.setUserData(Constants.STR_COIN);
 
         setPicture();
+
     }
 
     public Body getBodyCoin(){
@@ -73,6 +77,12 @@ public class Coin extends Actor{
         batch.end();
     }
 
+    public void init(float x, float y){
+        setPosition(x,y);
+        bodyCoin.setLinearVelocity(0, 0);
+        bodyCoin.setAngularVelocity(3);
+    }
+
     @Override
     public void setPosition(float x, float y) {
         bodyCoin.setTransform(x, y, 0);
@@ -91,5 +101,12 @@ public class Coin extends Actor{
         circleShape.dispose();
         batch.dispose();
         sprite.getTexture().dispose();
+    }
+
+
+
+    @Override
+    public void reset() {
+        setPosition(0,0);
     }
 }

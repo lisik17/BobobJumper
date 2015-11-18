@@ -9,13 +9,13 @@ public class MainScreen extends Game {
 
     @Override
     public void create() {
-        ScreenManager.getInstance().initialize(this);
-        ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
+        com.jumper.managers.ScreenManager.getInstance().initialize(this);
+        com.jumper.managers.ScreenManager.getInstance().show(com.jumper.managers.ScreenManager.CurrentScreen.MENU);
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        ScreenManager.getInstance().dispose();
+        com.jumper.managers.ScreenManager.getInstance().dispose();
     }
 }

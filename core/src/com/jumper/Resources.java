@@ -1,10 +1,8 @@
 package com.jumper;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.jumper.factories.SpiralFactory;
 
 /**
  * Created by Roma-Alisa on 10/6/2015.
@@ -15,15 +13,15 @@ public class Resources {
     private static Player player;
     private static OrthographicCamera camera;
     private static long score = 0;
-    private static SpiralFactory spiralFactory;
-    private static SnowBallFactory snowBallFactory;
+    private static com.jumper.factories.SpiralFactory spiralFactory;
+    private static com.jumper.factories.SnowBallFactory snowBallFactory;
     private static Font font;
 
-    public static SnowBallFactory getSnowBallFactory() {
+    public static com.jumper.factories.SnowBallFactory getSnowBallFactory() {
         return snowBallFactory;
     }
 
-    public static void setSnowBallFactory(SnowBallFactory snowBallFactory) {
+    public static void setSnowBallFactory(com.jumper.factories.SnowBallFactory snowBallFactory) {
         Resources.snowBallFactory = snowBallFactory;
     }
 
@@ -40,7 +38,7 @@ public class Resources {
         return spiralFactory;
     }
 
-    public static void setSpiralFactory(SpiralFactory spiralFactory) {
+    public static void setSpiralFactory(com.jumper.factories.SpiralFactory spiralFactory) {
         Resources.spiralFactory = spiralFactory;
     }
 

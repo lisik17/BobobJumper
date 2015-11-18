@@ -1,6 +1,5 @@
 package com.jumper;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -148,7 +147,7 @@ public class Player extends Actor {
         t.scheduleTask(new Task() {
             @Override
             public void run() {
-                ScreenManager.getInstance().show(ScreenManager.CurrentScreen.MENU);
+                com.jumper.managers.ScreenManager.getInstance().show(com.jumper.managers.ScreenManager.CurrentScreen.MENU);
             }
         }, 2.5f);
     }

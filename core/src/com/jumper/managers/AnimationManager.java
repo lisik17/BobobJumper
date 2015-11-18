@@ -1,4 +1,4 @@
-package com.jumper;
+package com.jumper.managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.jumper.Constants;
+import com.jumper.Resources;
 
 
 /**
@@ -46,7 +48,7 @@ public class AnimationManager extends Actor {
         metersToPixels();
         batch.draw(sprite,
                    ballCordsPixelsX,
-                   ballCordsPixelsY-Resources.getCamera().position.y*Constants.SCREEN_RATIO_HEIGHT,
+                   ballCordsPixelsY- Resources.getCamera().position.y* Constants.SCREEN_RATIO_HEIGHT,
                    Constants.PLAYER_WIDTH*Constants.SCREEN_RATIO_WIDTH,Constants.PLAYER_HEIGHT*Constants.SCREEN_RATIO_HEIGHT);
         batch.end();
     }

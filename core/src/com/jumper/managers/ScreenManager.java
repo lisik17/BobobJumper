@@ -1,7 +1,8 @@
-package com.jumper;
+package com.jumper.managers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.IntMap;
+import com.jumper.screens.GameJumper;
 
 /**
  * Created by Roma-Alisa on 07/11/15.

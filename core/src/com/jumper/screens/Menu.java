@@ -17,11 +17,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jumper.Constants;
 import com.jumper.Font;
 import com.jumper.GameDialog;
-import com.jumper.InputController;
+import com.jumper.managers.InputController;
 import com.jumper.Resources;
-import com.jumper.ScreenManager;
-
-import java.awt.Label;
+import com.jumper.managers.ScreenManager;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.jumper;
+package com.jumper.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,6 +9,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.jumper.Constants;
+import com.jumper.Resources;
 
 /**
  * Created by Roma-Alisa on 19/10/15.

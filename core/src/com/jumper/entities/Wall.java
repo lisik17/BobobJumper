@@ -1,4 +1,4 @@
-package com.jumper;
+package com.jumper.entities;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.jumper.Camera;
+import com.jumper.Resources;
 
 /**
  * Created by Roma-Alisa on 9/24/2015.

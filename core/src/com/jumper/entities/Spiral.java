@@ -1,4 +1,4 @@
-package com.jumper;
+package com.jumper.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +10,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.jumper.Constants;
+import com.jumper.Resources;
 
 import static com.jumper.Constants.SPIRAL_PIC_WIDTH;
 

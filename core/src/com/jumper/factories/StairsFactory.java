@@ -1,10 +1,12 @@
-package com.jumper;
+package com.jumper.factories;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.jumper.Constants;
+import com.jumper.Resources;
+import com.jumper.entities.Stair;
 
 import java.util.Random;
 
@@ -12,28 +14,28 @@ import java.util.Random;
  * Created by Roma-Alisa on 9/24/2015.
  */
 public class StairsFactory extends Actor {
-    private Array<Stair> stairArray;
+    private Array<com.jumper.entities.Stair> stairArray;
     private float maxStairCoordinateY;
-    private Stair stair;
+    private com.jumper.entities.Stair stair;
     private Random random;
 
     public StairsFactory(){
 
         this.maxStairCoordinateY = 0;
 
-        stairArray = new Array<Stair>();
+        stairArray = new Array<com.jumper.entities.Stair>();
         random=new Random();
 
         initStairs();
     }
 
     private void initStairs(){
-        stair = new Stair();
+        stair = new com.jumper.entities.Stair();
         stair.setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
         stair.setPosition((5) / 2f, -5);
         stairArray.add(stair);
 
-        stair = new Stair();
+        stair = new com.jumper.entities.Stair();
         stair.setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
         stair.setPosition((7) / 2f, -1);
         stairArray.add(stair);
@@ -43,17 +45,17 @@ public class StairsFactory extends Actor {
         stair.setPosition((5) / 2f, 5);
         stairArray.add(stair);
 
-        stair = new Stair();
+        stair = new com.jumper.entities.Stair();
         stair.setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
         stair.setPosition((8) / 2f, 10);
         stairArray.add(stair);
 
-        stair = new Stair();
+        stair = new com.jumper.entities.Stair();
         stair.setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
         stair.setPosition(-(8) / 2f, 15);
         stairArray.add(stair);
 
-        stair = new Stair();
+        stair = new com.jumper.entities.Stair();
         stair.setSize(Constants.STAIR_LENGTH, Constants.STAIR_WIDTH);
         stair.setPosition((-7) / 2f, 20);
         stairArray.add(stair);
@@ -69,7 +71,7 @@ public class StairsFactory extends Actor {
         addStair();
         removeStair();
 
-        for(Stair stair : stairArray){
+        for(com.jumper.entities.Stair stair : stairArray){
             stair.draw();
             stair.act(10f);
         }
@@ -92,7 +94,7 @@ public class StairsFactory extends Actor {
         //if(20 == this.maxStairCoordinateY - Camera.cordsToMeters(Resources.getCamera()).y) {
 
 
-            stair = new Stair();
+            stair = new com.jumper.entities.Stair();
 
             float xPos = MathUtils.random(-10, 10);
             //float xPos = 0;
@@ -114,7 +116,7 @@ public class StairsFactory extends Actor {
 
     private void addSpiral(float xPos, float yPos) {
         if(MathUtils.random(2) == 1 && stair.notMovingLeftRight()){
-            Resources.getSpiralFactory().addSpiral(new Spiral(), xPos, yPos);
+            Resources.getSpiralFactory().addSpiral(new com.jumper.entities.Spiral(), xPos, yPos);
         }
     }
 
@@ -144,7 +146,7 @@ public class StairsFactory extends Actor {
 
 
     public void dispose() {
-        for(Stair stair : stairArray){
+        for(com.jumper.entities.Stair stair : stairArray){
             stair.dispose();
         }
     }

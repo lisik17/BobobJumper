@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -17,6 +18,8 @@ public class BasicScreen extends Game {
     protected World world;
     protected Box2DDebugRenderer debugRenderer;
     protected OrthographicCamera camera;
+
+
 
     public BasicScreen() {
         super();
@@ -45,6 +48,8 @@ public class BasicScreen extends Game {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
+
         //now the ball is displayed
         debugRenderer.render(world,camera.combined);
 
@@ -65,6 +70,9 @@ public class BasicScreen extends Game {
 
         Resources.setWorld(world);
         Resources.setCamera(camera);
+
+
+
 
 
     }

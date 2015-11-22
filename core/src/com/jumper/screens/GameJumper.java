@@ -6,15 +6,19 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gushikustudios.rube.RubeScene;
 import com.gushikustudios.rube.loader.RubeSceneAsyncLoader;
 import com.gushikustudios.rube.loader.RubeSceneLoader;
 import com.jumper.Background;
 import com.jumper.BasicScreen;
 import com.jumper.Camera;
+import com.jumper.Constants;
 import com.jumper.Font;
 import com.jumper.Player;
 import com.jumper.Resources;
+import com.jumper.effect.JumpEffect;
 import com.jumper.entities.Wall;
 import com.jumper.factories.CoinsFactory;
 import com.jumper.factories.SnowBallFactory;
@@ -37,10 +41,13 @@ public class GameJumper extends BasicScreen implements Screen{
 	private com.jumper.managers.CollisionManager collisionManager;
 	private com.jumper.entities.Earth earth;
 	private com.jumper.managers.SoundManager soundManager;
-	//private AnimationManager animation;
 	private Font font;
 
+	private ParticleEffect effect;
+	private SpriteBatch batch;
+
 	public static Sound sound;
+	private JumpEffect jumpEffect;
 
 
 	RubeSceneLoader loader;
@@ -78,6 +85,7 @@ public class GameJumper extends BasicScreen implements Screen{
 		collisionManager = new com.jumper.managers.CollisionManager();
 
 		AssetManager assetManager = new AssetManager();
+		jumpEffect = new JumpEffect();
 
 		SoundManager.loadSounds();
 
@@ -89,6 +97,17 @@ public class GameJumper extends BasicScreen implements Screen{
 		}
 */
 
+/*		batch = new SpriteBatch();
+		effect = new ParticleEffect();
+		effect.load(Gdx.files.internal("effects/flame.p"), Gdx.files.internal("effects"));*/
+
+		//Gdx.app.log("app", "x " + Resources.getPlayer().getBodyPlayer().getPosition().x * Constants.SCREEN_RATIO_WIDTH + Gdx.graphics.getWidth() / 2f);
+		//Gdx.app.log("app", "y " + Resources.getPlayer().getBodyPlayer().getPosition().y * Constants.SCREEN_RATIO_HEIGHT + Gdx.graphics.getHeight()/ 2f);
+
+
+/*		effect.setPosition(Resources.getPlayer().getBodyPlayer().getPosition().x * Constants.SCREEN_RATIO_WIDTH + Gdx.graphics.getWidth() / 2f,
+				           Resources.getPlayer().getBodyPlayer().getPosition().y * Constants.SCREEN_RATIO_HEIGHT + Gdx.graphics.getHeight()/ 2f);
+		effect.start();*/
 
 		//animation = new AnimationManager();
 		font = new Font();
@@ -120,6 +139,15 @@ public class GameJumper extends BasicScreen implements Screen{
 
 
 		super.render();
+
+		jumpEffect.act(delta);
+
+/*		batch.begin();
+		effect.setPosition(Resources.getPlayer().getBodyPlayer().getPosition().x * Constants.SCREEN_RATIO_WIDTH + Gdx.graphics.getWidth() / 2f,
+				Resources.getPlayer().getBodyPlayer().getPosition().y * Constants.SCREEN_RATIO_HEIGHT + Gdx.graphics.getHeight() / 2f);
+		effect.draw(batch,delta);
+		batch.end();*/
+
 		//background.act(10f);
 		stairsFactory.act(10f);
 		spiralFactory.act(10f);
@@ -137,6 +165,8 @@ public class GameJumper extends BasicScreen implements Screen{
 		Camera.act();
 
 		Gdx.input.setCatchBackKey(true);
+
+
 
 	}
 

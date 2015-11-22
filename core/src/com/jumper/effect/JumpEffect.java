@@ -29,15 +29,16 @@ public class JumpEffect extends Actor {
     public void act(float delta) {
 
         batch.begin();
+        if(effect.isComplete()){effect.reset();}
         effect.setPosition(xMetersToPixels(Resources.getPlayer().getBodyPlayer().getPosition().x),
-                           yMetersToPixels(Resources.getPlayer().getBodyPlayer().getPosition().y));
+                           yMetersToPixels(0));
         effect.draw(batch,delta);
         batch.end();
 
     }
 
     private float yMetersToPixels(float yMeters) {
-        return yMeters * Constants.SCREEN_RATIO_HEIGHT + Gdx.graphics.getHeight() / 2f;
+        return -1 * Constants.SCREEN_RATIO_HEIGHT + Gdx.graphics.getHeight() / 2f;
     }
 
     private float xMetersToPixels(float xMeters) {

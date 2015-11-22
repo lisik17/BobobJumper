@@ -15,6 +15,11 @@ public class JumpEffect extends Actor {
 
     private ParticleEffect effect;
     private SpriteBatch batch;
+    private State state;
+
+    private enum State{
+        NONE, PLAY_EFFECT;
+    }
 
     public JumpEffect(){
         batch = new SpriteBatch();
@@ -23,22 +28,41 @@ public class JumpEffect extends Actor {
         effect.setPosition(xMetersToPixels(Resources.getPlayer().getBodyPlayer().getPosition().x),
                 yMetersToPixels(Resources.getPlayer().getBodyPlayer().getPosition().y));
         effect.start();
+
+        state = State.NONE;
+    }
+
+    public void setEffectStatePlay(){
+        state = State.PLAY_EFFECT;
     }
 
     @Override
     public void act(float delta) {
 
         batch.begin();
-        if(effect.isComplete()){effect.reset();}
-        effect.setPosition(xMetersToPixels(Resources.getPlayer().getBodyPlayer().getPosition().x),
-                           yMetersToPixels(0));
-        effect.draw(batch,delta);
+
+        playEffect(delta);
+
         batch.end();
 
     }
 
+    private void playEffect(float delta) {
+        if(state == State.PLAY_EFFECT) {
+            if (effect.isComplete()) {
+                effect.reset();
+                state = State.NONE;
+                return;
+            }
+            effect.setPosition(xMetersToPixels(Resources.getPlayer().getBodyPlayer().getPosition().x),
+                    yMetersToPixels(0));
+            effect.draw(batch, delta);
+            //
+        }
+    }
+
     private float yMetersToPixels(float yMeters) {
-        return -1 * Constants.SCREEN_RATIO_HEIGHT + Gdx.graphics.getHeight() / 2f;
+        return -1.5f * Constants.SCREEN_RATIO_HEIGHT + Gdx.graphics.getHeight() / 2f;
     }
 
     private float xMetersToPixels(float xMeters) {

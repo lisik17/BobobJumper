@@ -2,6 +2,7 @@ package com.jumper;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
+import com.jumper.effect.JumpEffect;
 import com.jumper.factories.SnowBallFactory;
 import com.jumper.factories.SpiralFactory;
 
@@ -18,6 +19,17 @@ public class Resources {
 
     private static SpiralFactory spiralFactory;
     private static SnowBallFactory snowBallFactory;
+    private static JumpEffect jumpEffect;
+
+
+    public static JumpEffect getJumpEffect() {
+        return jumpEffect;
+    }
+
+    public static void setJumpEffect(JumpEffect jumpEffect) {
+        Resources.jumpEffect = jumpEffect;
+    }
+
 
     public static com.jumper.factories.SnowBallFactory getSnowBallFactory() {
         return snowBallFactory;

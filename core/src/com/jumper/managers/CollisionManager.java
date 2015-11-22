@@ -126,6 +126,7 @@ public class CollisionManager {
             if(playerAboveSpiral()) {
                 SoundManager.getInstance().playSound();
                 Resources.getPlayer().boost();
+                Resources.getJumpEffect().setEffectStatePlay();
             }
         }
     }

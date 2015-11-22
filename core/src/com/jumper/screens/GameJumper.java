@@ -86,6 +86,7 @@ public class GameJumper extends BasicScreen implements Screen{
 
 		AssetManager assetManager = new AssetManager();
 		jumpEffect = new JumpEffect();
+		Resources.setJumpEffect(jumpEffect);
 
 		SoundManager.loadSounds();
 

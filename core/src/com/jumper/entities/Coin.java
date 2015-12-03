@@ -65,10 +65,10 @@ public class Coin extends Actor implements Pool.Poolable {
 
     private void setPicture() {
         batch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("coin.png"));
+        texture = new Texture(Gdx.files.internal(Constants.PIC_COIN));
         sprite = new Sprite(texture);
 
-        sprite.setSize(2, 2);
+        sprite.setSize(4, 4);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
         sprite.setCenter(0, 0);
     }
@@ -90,7 +90,7 @@ public class Coin extends Actor implements Pool.Poolable {
     public void reset() {
         setPosition(0, -10);
         bodyCoin.setLinearVelocity(0, 0);
-        bodyCoin.setAngularVelocity(3);
+        bodyCoin.setAngularVelocity(0);
     }
 
     @Override

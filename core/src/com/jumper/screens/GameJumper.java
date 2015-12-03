@@ -194,6 +194,10 @@ public class GameJumper extends BasicScreen implements Screen{
 		spiralFactory.dispose();
 
 		wall.dispose();
+
+		if(null != effect) {
+			effect.dispose();
+		}
 		//background.dispose();
 		earth.dispose();
 		//collisionManager.dispose();

@@ -81,7 +81,7 @@ public class Spiral extends Actor implements Pool.Poolable{
 
     private void setPicture(){
         batch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("spiral.png"));
+        texture = new Texture(Gdx.files.internal(Constants.PIC_SPIRAL));
         sprite = new Sprite(texture);
 
         sprite.setSize(SPIRAL_PIC_WIDTH, SPIRAL_PIC_WIDTH);

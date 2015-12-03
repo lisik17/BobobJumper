@@ -77,10 +77,10 @@ public class Player extends Actor {
 
     private void setPicture(){
         batch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("bobo.png"));
+        texture = new Texture(Gdx.files.internal(Constants.PIC_PLAYER));
         sprite = new Sprite(texture);
 
-        sprite.setSize(6, 6);
+        sprite.setSize(6, 7);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
         sprite.setCenter(0, 0);
     }
@@ -88,7 +88,7 @@ public class Player extends Actor {
     public void draw(){
         batch.setProjectionMatrix(Resources.getCamera().combined);
         batch.begin();
-        sprite.setPosition(bodyPlayer.getPosition().x - sprite.getWidth() / 2, bodyPlayer.getPosition().y - sprite.getHeight() / 2);
+        sprite.setPosition(bodyPlayer.getPosition().x - sprite.getWidth() / 2, bodyPlayer.getPosition().y - sprite.getHeight() / 2 + 1);
         sprite.setRotation(bodyPlayer.getAngle() * MathUtils.radiansToDegrees);
         sprite.draw(batch);
         batch.end();

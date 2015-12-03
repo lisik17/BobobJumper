@@ -113,10 +113,10 @@ public class Stair extends Actor implements Pool.Poolable{
 
     private void setPicture(){
         batch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("grass.png"));
+        texture = new Texture(Gdx.files.internal(Constants.PIC_STAIR));
         sprite = new Sprite(texture);
 
-        sprite.setSize(stairWidth, 2);
+        sprite.setSize(8, 4);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
         sprite.setCenter(0, 0);
     }

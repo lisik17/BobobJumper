@@ -34,7 +34,7 @@ public class SnowBall extends Actor implements Pool.Poolable{
 
         //ball shape
         circleShape = new CircleShape();
-        circleShape.setRadius(1f);
+        circleShape.setRadius(Constants.SNOW_BALL_RADIUS);
 
         //fixture def
         fixtureDef = new FixtureDef();
@@ -49,12 +49,35 @@ public class SnowBall extends Actor implements Pool.Poolable{
 
         bodySnowBall.setUserData(Constants.STR_SNOW_BALL);
 
+        bodySnowBall.setLinearVelocity(Constants.SNOW_BALL_SPEED,0);
+
         setPicture();
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+
+        Gdx.app.log("app","act !!");
+
+        snowBallMoveLeftRight();
+
+    }
+
+    private void snowBallMoveLeftRight() {
+        if(outOfBorder()){
+            bodySnowBall.setLinearVelocity(-getBodySnowBall().getLinearVelocity().x,0);
+        }
+    }
+
+    private boolean outOfBorder() {
+        return bodySnowBall.getPosition().x > (Constants.SCREEN_SIZE_WIDTH - Constants.SNOW_BALL_RADIUS)/2
+         ||bodySnowBall.getPosition().x < -(Constants.SCREEN_SIZE_WIDTH - Constants.SNOW_BALL_RADIUS)/2;
     }
 
     private void setPicture(){
         batch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("coin.png"));
+        texture = new Texture(Gdx.files.internal(Constants.PIC_COIN));
         sprite = new Sprite(texture);
 
         sprite.setSize(2, 2);
@@ -83,6 +106,7 @@ public class SnowBall extends Actor implements Pool.Poolable{
 
     public void init(float x, float y) {
         setPosition(x, y);
+        bodySnowBall.setLinearVelocity(Constants.SNOW_BALL_SPEED,0);
     }
 
     @Override
